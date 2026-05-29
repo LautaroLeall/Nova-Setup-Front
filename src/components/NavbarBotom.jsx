@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
     Home,
     LaptopMinimalCheck,
@@ -7,51 +7,78 @@ import {
     User,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navItems = [
-    { label: "Inicio", icon: Home },
-    { label: "Productos", icon: LaptopMinimalCheck },
-    { label: "Favoritos", icon: Heart },
-    { label: "Carrito", icon: ShoppingCart },
-    { label: "Perfil", icon: User },
-];
+import { useNavigate, useLocation } from "react-router";
+import { AuthContext } from "../context/AuthContext";
+import "../styles/NavbarBotom.css";
 
 export function BottomNavBar({
     className = "",
-    defaultIndex = 0,
 }) {
-    const [activeIndex, setActiveIndex] = useState(defaultIndex);
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    
+    const navItems = [
+        { label: "Inicio", icon: Home, to: "/" },
+        { label: "Productos", icon: LaptopMinimalCheck, to: "/shop" },
+        { label: "Favoritos", icon: Heart, to: "/favoritos" },
+        { label: "Carrito", icon: ShoppingCart, to: "/carrito" },
+        { label: "Perfil", icon: User, to: user ? "/perfil" : "/login" },
+    ];
+
+    // Determinar el index activo basado en la ruta actual
+    const getActiveIndex = () => {
+        const index = navItems.findIndex(item => {
+            if (item.to === "/") {
+                return location.pathname === "/";
+            }
+            return location.pathname.startsWith(item.to);
+        });
+        return index !== -1 ? index : 0;
+    };
+
+    const activeIndex = getActiveIndex();
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
-            //
-            // El Hero ocupa 500vh. Con offset ["start start", "end start"]
-            // scrollYProgress llega a 1 cuando el usuario scrolleó 400vh
-            // (500vh - 100vh del viewport).
-            //
-            // Fórmula: window.innerHeight × MULTIPLICADOR
-            //   · Multiplicador 4   → aparece justo al terminar el Hero
-            //   · Multiplicador 4.5 → aparece un poco después ← ACTUAL
-            //   · Multiplicador 5   → aparece aún más tarde
-            const MULTIPLICADOR = 4;
+            // Rutas donde NO queremos que aparezca el NavbarBotom
+            const hiddenRoutes = ["/login", "/register", "/perfil"];
+            const isHiddenRoute = hiddenRoutes.some(route => location.pathname.startsWith(route));
+
+            if (isHiddenRoute) {
+                setIsVisible(false);
+                return;
+            }
+
+            const MULTIPLICADOR = 3;
             const heroEnd = window.innerHeight * MULTIPLICADOR;
-            setIsVisible(window.scrollY > heroEnd);
+            
+            // Mostrar siempre la barra inferior en rutas distintas a la principal
+            if (location.pathname !== "/") {
+                setIsVisible(true);
+            } else {
+                setIsVisible(window.scrollY > heroEnd);
+            }
         };
+        handleScroll(); // Call on mount/route change
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [location.pathname]);
+
+    const handleNavigation = (idx, to) => {
+        navigate(to);
+    };
 
     return (
         <AnimatePresence>
             {isVisible && (
                 <motion.nav
-                    initial={{ y: 100, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: 100, opacity: 0 }}
+                    initial={{ y: 100, x: "-50%", opacity: 0 }}
+                    animate={{ y: 0, x: "-50%", opacity: 1 }}
+                    exit={{ y: 100, x: "-50%", opacity: 0 }}
                     transition={{ type: "spring", damping: 20, stiffness: 100 }}
-                    className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 border border-[#2c2767]/60 rounded-full flex items-center p-2 space-x-1 min-w-[320px] max-w-[95vw] h-[64px] ${className}`}
-                    style={{ background: "rgba(6,6,15,0.85)", backdropFilter: "blur(20px)", boxShadow: "0 0 30px rgba(44,39,103,0.4)" }}
+                    className={`bottom-nav-container ${className}`}
                 >
                     {navItems.map((item, idx) => {
                         const Icon = item.icon;
@@ -60,25 +87,21 @@ export function BottomNavBar({
                         return (
                             <button
                                 key={item.label}
-                                className={`flex items-center px-4 py-2 rounded-full transition-all duration-500 ease-in-out relative h-12 focus:outline-none ${isActive
-                                    ? "text-white shadow-[0_0_15px_rgba(58,219,241,0.3)] gap-2"
-                                    : "bg-transparent text-[#a682e7]/60 hover:bg-[#2c2767]/40 hover:text-[#3adbf1] gap-0"
-                                    }`}
-                                onClick={() => setActiveIndex(idx)}
+                                className={`bottom-nav-btn ${isActive ? "bottom-nav-btn-active" : "bottom-nav-btn-inactive"}`}
+                                onClick={() => handleNavigation(idx, item.to)}
                                 aria-label={item.label}
                                 type="button"
                             >
                                 <Icon
                                     size={20}
                                     strokeWidth={isActive ? 2.5 : 2}
-                                    className="flex-shrink-0"
+                                    className="bottom-nav-icon"
                                 />
 
                                 <div
-                                    className={`overflow-hidden transition-all duration-500 ease-in-out flex items-center ${isActive ? "max-w-[80px] opacity-100" : "max-w-0 opacity-0"
-                                        }`}
+                                    className={`bottom-nav-label-container ${isActive ? "bottom-nav-label-active" : "bottom-nav-label-inactive"}`}
                                 >
-                                    <span className="font-bold text-xs uppercase tracking-wider whitespace-nowrap">
+                                    <span className="bottom-nav-label">
                                         {item.label}
                                     </span>
                                 </div>
@@ -86,7 +109,7 @@ export function BottomNavBar({
                                 {isActive && (
                                     <motion.div
                                         layoutId="activeTab"
-                                        className="absolute inset-0 rounded-full -z-10 nova-gradient"
+                                        className="bottom-nav-bg-active"
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                     />
                                 )}
