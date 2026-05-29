@@ -1,0 +1,341 @@
+/* ── HERO CONTAINER ── */
+.hero-container-wrapper {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-nova-bg);
+  height: 400vh;
+}
+
+.hero-sticky-zone {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  perspective: 1200px;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.hero-title-motion {
+  text-align: center;
+  max-width: 100%;
+  z-index: 10;
+  margin-bottom: 1.5rem;
+}
+
+.hero-device-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+
+.hero-device-motion {
+  width: 100%;
+  max-width: 740px;
+  will-change: transform, opacity;
+}
+
+/* ── PRO TABLET (DISEÑO IPAD COMPACTO) ── */
+.pro-tablet-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 1.5rem;
+}
+
+.pro-tablet-glow {
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, var(--color-nova-purple), var(--color-nova-blue), var(--color-nova-cyan), var(--color-nova-purple));
+  background-size: 200% 200%;
+  border-radius: 1.6rem;
+  z-index: 0;
+  filter: blur(16px);
+  opacity: 0.5;
+  animation: glow-pulse 5s linear infinite;
+}
+
+@keyframes glow-pulse {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.pro-tablet-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.5rem;
+  background-color: #161617;
+  padding: 0.85rem;
+  box-shadow: inset 0 0 0 1px #2d2d2f, 0 20px 50px rgba(0, 0, 0, 0.9);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* ── BOTONES DEL IPAD ── */
+.pro-tablet-power-btn {
+  position: absolute;
+  top: -3px;
+  left: 3rem;
+  width: 2.5rem;
+  height: 3px;
+  background-color: #333;
+  border-radius: 3px 3px 0 0;
+  z-index: 0;
+}
+
+.pro-tablet-volume-btn {
+  position: absolute;
+  top: 3rem;
+  right: -3px;
+  width: 3px;
+  height: 3rem;
+  background-color: #333;
+  border-radius: 0 3px 3px 0;
+  z-index: 0;
+}
+
+.pro-tablet-volume-btn::after {
+  content: '';
+  position: absolute;
+  top: 3.5rem;
+  right: 0;
+  width: 3px;
+  height: 3rem;
+  background-color: #333;
+  border-radius: 0 3px 3px 0;
+}
+
+/* ── CÁMARA ── */
+.pro-tablet-camera-container {
+  position: absolute;
+  top: 0.35rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pro-tablet-camera {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #050505;
+  box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.3);
+  border: 1px solid #1a1a1a;
+}
+
+.pro-tablet-sensor {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: #0f0f0f;
+}
+
+/* ── PANTALLA ── */
+.pro-tablet-display {
+  flex-grow: 1;
+  background-color: var(--color-nova-bg);
+  border-radius: 0.85rem;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* ── HERO TYPOGRAPHY ── */
+.hero-title-text {
+  font-size: 2rem;
+  font-weight: 900;
+  color: white;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+  .hero-title-text {
+    font-size: 2.8rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-title-text {
+    font-size: 3.5rem;
+  }
+}
+
+.hero-subtitle-text {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 300;
+  color: var(--color-nova-light);
+  line-height: 1.4;
+}
+
+/* ── CAROUSEL TRACK ── */
+.hero-carousel-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-nova-bg);
+}
+
+.hero-carousel-track {
+  display: flex;
+  height: 100%;
+}
+
+.hero-carousel-group {
+  display: flex;
+  height: 100%;
+  width: 33.333%;
+}
+
+/* ── CARDS dentro de la Tablet ── */
+.product-card {
+  position: relative;
+  height: 100%;
+  flex: 1 1 0%;
+  overflow: hidden;
+  cursor: pointer;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.product-card:last-child {
+  border-right-width: 0;
+}
+
+.product-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.06);
+}
+
+.product-overlay-dark {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(6, 6, 15, 0.65);
+  transition: background-color 0.4s ease;
+}
+
+.product-card:hover .product-overlay-dark {
+  background-color: rgba(6, 6, 15, 0.35);
+}
+
+.product-overlay-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--color-nova-bg) 0%, rgba(6, 6, 15, 0.4) 50%, transparent 100%);
+}
+
+.product-badge-container {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+}
+
+.product-badge {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: white;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, var(--color-nova-cyan) 0%, var(--color-nova-blue) 100%);
+}
+
+.product-info-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  transform: translateY(0.5rem);
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.product-card:hover .product-info-container {
+  transform: translateY(0);
+}
+
+.product-brand {
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.15rem;
+  text-transform: uppercase;
+  color: var(--color-nova-cyan);
+}
+
+.product-name {
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+}
+
+.product-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-price {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: white;
+}
+
+.product-add-btn {
+  color: white;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.25s ease;
+  background: linear-gradient(135deg, var(--color-nova-cyan) 0%, var(--color-nova-blue) 100%);
+  border: none;
+  cursor: pointer;
+}
+
+.product-card:hover .product-add-btn {
+  opacity: 1;
+  transform: scale(1);
+}
