@@ -1,5 +1,7 @@
+// src/hero/HeroContainer.jsx
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import "../styles/Hero.css";
 
 export const HeroContainer = ({ titleComponent, children, containerRef, scrollYProgress }) => {
     const internalRef = useRef(null);
@@ -12,80 +14,66 @@ export const HeroContainer = ({ titleComponent, children, containerRef, scrollYP
 
     const p = scrollYProgress ?? ownProgress;
 
-    // ── Fases ────────────────────────────────────────────────────
-    // 0.00 → 0.15 : Mac se levanta (acostada → derecha)
-    // 0.15 → 0.80 : Mac quieta, carrusel corre
-    // 0.80 → 1.00 : Mac se aleja
-    const rotateX    = useTransform(p, [0, 0.15, 0.80, 1], [25, 0, 0, -25]);
-    const translateZ = useTransform(p, [0, 0.15, 0.80, 1], [-200, 0, 0, -600]);
-    const macScale   = useTransform(p, [0, 0.15, 0.80, 1], [0.85, 1, 1, 0.65]);
-    const macOpacity = useTransform(p, [0, 0.15, 0.88, 1], [0.5, 1, 1, 0]);
+    const deviceY = useTransform(p, [0, 0.25, 0.75, 1], ["5vh", "0vh", "-5vh", "-10vh"]);
 
-    // ── Título: grande al inicio, se achica mientras la Mac sube ─
-    // Mientras p va de 0 a 0.15 el titulo se encoge y sube
-    const titleScale   = useTransform(p, [0, 0.15], [1, 0.55]);
-    const titleOpacity = useTransform(p, [0, 0.12, 0.80, 0.88], [1, 0, 0, 0]);
-    const titleY       = useTransform(p, [0, 0.15], ["0px", "-24px"]);
+    const rotateX = useTransform(p, [0, 0.25, 0.75, 1], [20, 0, 0, -15]);
+    const translateZ = useTransform(p, [0, 0.25, 0.75, 1], [-150, 0, 0, -400]);
+    const deviceScale = useTransform(p, [0, 0.25, 0.75, 1], [0.9, 1, 1, 0.8]);
+    const deviceOpacity = useTransform(p, [0, 0.1, 0.80, 1], [0.6, 1, 1, 0]);
+
+    const titleY = useTransform(p, [0, 0.25], ["5vh", "-45vh"]);
+    const titleOpacity = useTransform(p, [0, 0.18, 0.25], [1, 0.4, 0]);
+    const titleScale = useTransform(p, [0, 0.25], [1, 0.85]);
 
     return (
-        <div ref={ref} className="relative w-full bg-black" style={{ height: "500vh" }}>
+        <div ref={ref} className="hero-container-wrapper">
+            <div className="hero-sticky-zone">
 
-            {/* ── Zona sticky: exactamente 100vh ── */}
-            <div
-                className="sticky top-0 w-full h-screen flex flex-col overflow-hidden"
-                style={{ perspective: "1400px" }}
-            >
-                {/* Espaciador del Navbar (72px) */}
-                <div className="h-[100px] shrink-0" />
-
-                {/* ── TÍTULO ── grande al inicio, desaparece al subir la Mac */}
                 <motion.div
-                    initial={{ opacity: 0, y: 16 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.15 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
                     style={{ scale: titleScale, opacity: titleOpacity, y: titleY }}
-                    className="shrink-0 text-center px-3 pb-3 origin-top"
+                    className="hero-title-motion"
                 >
                     {titleComponent}
                 </motion.div>
 
-                {/* ── MAC ── ocupa el espacio restante, crece cuando el título se achica */}
-                <div className="flex-1 flex items-center justify-center px-3 pb-4 min-h-0">
+                <div className="hero-device-container">
                     <motion.div
-                        className="w-full max-w-4xl"
+                        className="hero-device-motion"
                         style={{
+                            y: deviceY,
                             rotateX,
                             z: translateZ,
-                            scale: macScale,
-                            opacity: macOpacity,
+                            scale: deviceScale,
+                            opacity: deviceOpacity,
                             transformStyle: "preserve-3d",
-                            maxHeight: "calc(100vh - 72px - 2rem)",
                         }}
                     >
-                        <MacScreen>{children}</MacScreen>
+                        <ProTablet>{children}</ProTablet>
                     </motion.div>
                 </div>
+
             </div>
         </div>
     );
 };
 
-const MacScreen = ({ children }) => (
-    <div className="w-full" style={{ aspectRatio: "16/9" }}>
-        <div className="w-full h-full rounded-[1.75rem] border-4 border-[#2a2a2a] bg-[#1c1c1e] shadow-[0_30px_80px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col relative">
-            {/* Notch */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-[#1c1c1e] rounded-b-xl z-20 flex items-end justify-center pb-1">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#111] border border-white/10 flex items-center justify-center">
-                    <div className="w-[3px] h-[3px] bg-blue-400/50 rounded-full" />
-                </div>
+const ProTablet = ({ children }) => (
+    <div className="pro-tablet-wrapper">
+        <div className="pro-tablet-glow" />
+        <div className="pro-tablet-frame">
+            <div className="pro-tablet-power-btn" />
+            <div className="pro-tablet-volume-btn" />
+
+            <div className="pro-tablet-camera-container">
+                <div className="pro-tablet-sensor" />
+                <div className="pro-tablet-camera" />
             </div>
-            {/* Pantalla */}
-            <div className="grow mx-2 mt-2 mb-5 bg-[#050505] rounded-t-3xl rounded-b-sm overflow-hidden border border-white/[0.06]">
+
+            <div className="pro-tablet-display">
                 {children}
-            </div>
-            {/* Barbilla */}
-            <div className="absolute bottom-1 left-0 right-0 h-4 flex justify-center items-center">
-                <span className="text-[7px] tracking-[0.25em] text-white/20 uppercase font-semibold">MacBook Pro</span>
             </div>
         </div>
     </div>
