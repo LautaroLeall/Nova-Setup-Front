@@ -1,10 +1,15 @@
-import { useState, useEffect } from "react";
-import { ShoppingCart, Search, Menu, X } from "lucide-react";
+import { useState, useEffect, useContext } from "react";
+import { ShoppingCart, Search, Menu, X, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link, useLocation } from "react-router";
+import { AuthContext } from "../context/AuthContext";
+import "../styles/Navbar.css"; // NO OLVIDAR IMPORTAR EL CSS
 
 export const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { user, logout } = useContext(AuthContext);
+    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -12,76 +17,89 @@ export const Navbar = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Cierra el menú móvil si cambia de ruta
+    useEffect(() => {
+        setIsMobileMenuOpen(false);
+    }, [location.pathname]);
+
     const navLinks = [
-        { name: "Teclados",       href: "#" },
-        { name: "Iluminación",    href: "#" },
-        { name: "Coleccionables", href: "#" },
-        { name: "Accesorios",     href: "#" },
+        { name: "Inicio",         to: "/" },
+        { name: "Productos",      to: "/shop" },
+        { name: "Teclados",       to: "/shop" },
+        { name: "Accesorios",     to: "/shop" },
     ];
 
+    // Rutas donde la Navbar Superior no debe aparecer
+    const hiddenRoutes = ["/login", "/register"];
+    if (hiddenRoutes.some(route => location.pathname.startsWith(route))) {
+        return null;
+    }
+
     return (
-        <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-                isScrolled
-                    ? "py-2 border-b border-[#2c2767]/60"
-                    : "py-3 bg-transparent"
-            }`}
-            style={isScrolled ? {
-                background: "rgba(6,6,15,0.75)",
-                backdropFilter: "blur(16px)",
-            } : {}}
-        >
-            <div className="max-w-7xl mx-auto px-5 flex items-center justify-between">
+        <header className={`navbar-header ${isScrolled ? "scrolled" : "top"}`}>
+            <div className="navbar-container">
 
                 {/* ── Logo ── */}
-                <div className="flex items-center gap-2.5">
-                    <img
-                        src="/logo-NovaSetUp.png"
-                        alt="Nova SetUp"
-                        className="w-10 h-10 drop-shadow-[0_0_8px_rgba(58,219,241,0.6)]"
-                    />
-                    <span className="font-black text-xl tracking-tighter hidden sm:block" style={{
-                        background: "linear-gradient(135deg, #3adbf1 0%, #5572d0 50%, #a682e7 100%)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text",
-                    }}>
+                <Link to="/" className="navbar-logo-link group">
+                    <div className="navbar-logo-wrapper">
+                        <img
+                            src="/logo-NovaSetUp.png"
+                            alt="Nova SetUp"
+                            className="navbar-logo-img"
+                        />
+                    </div>
+                    <span className="navbar-logo-text">
                         Nova SetUp
                     </span>
-                </div>
+                </Link>
 
                 {/* ── Desktop Nav ── */}
-                <nav className="hidden md:flex items-center gap-7">
+                <nav className="navbar-desktop-nav">
                     {navLinks.map((link) => (
-                        <a
+                        <Link
                             key={link.name}
-                            href={link.href}
-                            className="text-[#a682e7]/80 hover:text-[#3adbf1] text-sm font-medium tracking-wide transition-colors duration-200 relative group"
+                            to={link.to}
+                            className="navbar-link group"
                         >
                             {link.name}
-                            <span className="absolute -bottom-0.5 left-0 w-0 h-[1.5px] rounded-full transition-all duration-300 group-hover:w-full"
-                                style={{ background: "linear-gradient(90deg, #3adbf1, #5572d0)" }}
-                            />
-                        </a>
+                            <span className="navbar-link-underline" />
+                        </Link>
                     ))}
                 </nav>
 
                 {/* ── Actions ── */}
-                <div className="flex items-center gap-2">
-                    <button className="text-[#a682e7]/70 hover:text-[#3adbf1] transition-colors duration-200 p-2 rounded-lg hover:bg-[#2c2767]/40">
+                <div className="navbar-actions">
+                    <button className="navbar-action-btn">
                         <Search size={19} />
                     </button>
 
-                    <button className="text-[#a682e7]/70 hover:text-[#3adbf1] transition-colors duration-200 p-2 rounded-lg hover:bg-[#2c2767]/40 relative">
+                    {/* Lógica de Usuario Desktop */}
+                    {user ? (
+                        <div className="navbar-user-group group">
+                            <button className="navbar-user-btn">
+                                <User size={19} />
+                                <span>{user.firstName}</span>
+                            </button>
+                            {/* Dropdown Logout */}
+                            <div className="navbar-user-dropdown">
+                                <button onClick={logout} className="navbar-logout-btn">
+                                    Cerrar Sesión
+                                </button>
+                            </div>
+                        </div>
+                    ) : (
+                        <Link to="/login" className="navbar-login-link">
+                            <User size={19} />
+                        </Link>
+                    )}
+
+                    <button className="navbar-cart-btn">
                         <ShoppingCart size={19} />
-                        <span className="absolute top-1 right-1 w-3.5 h-3.5 text-[9px] font-black rounded-full flex items-center justify-center"
-                            style={{ background: "linear-gradient(135deg,#3adbf1,#5572d0)" }}>
-                            0
-                        </span>
+                        <span className="navbar-cart-badge">0</span>
                     </button>
 
                     <button
-                        className="md:hidden text-[#a682e7]/70 hover:text-[#3adbf1] p-2 transition-colors duration-200"
+                        className="navbar-mobile-toggle"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
                         {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -93,26 +111,54 @@ export const Navbar = () => {
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -12 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 right-0 border-t border-[#2c2767]/50 p-5 md:hidden"
-                        style={{ background: "rgba(6,6,15,0.95)", backdropFilter: "blur(20px)" }}
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="navbar-mobile-menu"
                     >
-                        <ul className="flex flex-col gap-4">
-                            {navLinks.map((link) => (
-                                <li key={link.name}>
-                                    <a
-                                        href={link.href}
-                                        className="text-[#a682e7] hover:text-[#3adbf1] text-base font-semibold block transition-colors duration-200"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                    >
-                                        {link.name}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
+                        <div className="navbar-mobile-content">
+                            
+                            {/* User Section Mobile */}
+                            <div className="navbar-mobile-user">
+                                <div className="navbar-mobile-avatar">
+                                    <User size={24} color="white" />
+                                </div>
+                                <div className="navbar-mobile-user-info">
+                                    {user ? (
+                                        <>
+                                            <p className="navbar-mobile-user-name">{user.firstName} {user.lastName}</p>
+                                            <button onClick={logout} className="navbar-mobile-logout">Cerrar Sesión</button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <p className="navbar-mobile-welcome">Bienvenido</p>
+                                            <div className="navbar-mobile-auth-links">
+                                                <Link to="/login" className="navbar-mobile-auth-login">Iniciar Sesión</Link>
+                                                <span className="navbar-mobile-auth-separator">|</span>
+                                                <Link to="/register" className="navbar-mobile-auth-register">Registrarse</Link>
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Nav Links Mobile */}
+                            <ul className="navbar-mobile-list">
+                                {navLinks.map((link) => (
+                                    <li key={link.name}>
+                                        <Link
+                                            to={link.to}
+                                            className="navbar-mobile-link"
+                                        >
+                                            <span className="navbar-mobile-link-dot"></span>
+                                            {link.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                            
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
