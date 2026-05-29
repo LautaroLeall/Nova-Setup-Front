@@ -5,73 +5,91 @@
   --font-display: "Inter", "sans-serif";
 
   /* ── Paleta Nova SetUp ── */
-  --color-nova-cyan:    #3adbf1;   /* Cyan principal  */
-  --color-nova-blue:    #5572d0;   /* Azul medio      */
-  --color-nova-dark:    #2c2767;   /* Azul oscuro     */
-  --color-nova-lavender:#a682e7;   /* Lavanda/lila    */
-  --color-nova-purple:  #6926bd;   /* Púrpura profundo*/
+  --color-nova-cyan: #3adbf1;
+  /* Cyan principal  */
+  --color-nova-blue: #5572d0;
+  /* Azul medio      */
+  --color-nova-dark: #2c2767;
+  /* Azul marino     */
+  --color-nova-light: #a682e7;
+  /* Lavanda         */
+  --color-nova-purple: #6926bd;
+  /* Púrpura         */
+  --color-nova-bg: #06060f;
+  /* Fondo oscuro    */
 
-  /* Aliases para uso fácil con Tailwind */
-  --color-accent:   var(--color-nova-cyan);
-  --color-primary:  var(--color-nova-blue);
-  --color-secondary:var(--color-nova-purple);
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-nova-pulse: novaPulse 6s ease-in-out infinite alternate;
+
+  @keyframes novaPulse {
+    0% {
+      transform: scale(1) translateY(-50%);
+      opacity: 0.15;
+      filter: blur(140px);
+    }
+
+    100% {
+      transform: scale(1.1) translateY(-50%);
+      opacity: 0.25;
+      filter: blur(160px);
+    }
+  }
 }
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-    background-color: #06060f;  /* Negro con tinte azul oscuro */
-  }
+/* Scrollbar personalizado con la paleta Nova */
+::-webkit-scrollbar {
+  width: 8px;
+}
 
-  body {
-    @apply antialiased;
-    cursor: crosshair;
-    background-color: #06060f;
-    color: #f0f0ff;
-  }
+::-webkit-scrollbar-track {
+  background: var(--color-nova-bg);
+}
 
-  /* ── Custom Scrollbar en paleta Nova ── */
-  ::-webkit-scrollbar        { width: 5px; }
-  ::-webkit-scrollbar-track  { background: #06060f; }
-  ::-webkit-scrollbar-thumb  { background: #2c2767; border-radius: 10px; }
-  ::-webkit-scrollbar-thumb:hover { background: #3adbf1; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-nova-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-nova-blue);
 }
 
 @layer utilities {
-  /* Gradiente signature del logo */
   .nova-gradient {
-    background: linear-gradient(135deg, #3adbf1 0%, #5572d0 45%, #6926bd 100%);
+    background: linear-gradient(135deg, var(--color-nova-cyan) 0%, var(--color-nova-blue) 50%, var(--color-nova-purple) 100%);
   }
+
   .nova-gradient-text {
-    background: linear-gradient(135deg, #3adbf1 0%, #5572d0 45%, #a682e7 100%);
+    background: linear-gradient(135deg, var(--color-nova-cyan) 0%, var(--color-nova-blue) 50%, var(--color-nova-light) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
   .nova-glow {
-    box-shadow: 0 0 20px rgba(58, 219, 241, 0.35), 0 0 40px rgba(85, 114, 208, 0.2);
+    box-shadow: 0 0 15px rgba(58, 219, 241, 0.4), 0 0 30px rgba(105, 38, 189, 0.2);
   }
+
   .nova-glow-purple {
     box-shadow: 0 0 20px rgba(105, 38, 189, 0.45), 0 0 40px rgba(166, 130, 231, 0.2);
   }
+}
 
-  /* Animación gradiente animado */
-  .animate-gradient {
-    background-size: 200% 200%;
-    animation: gradientShift 5s ease infinite;
-  }
-  @keyframes gradientShift {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+@layer base {
+  body {
+    background-color: var(--color-nova-bg);
+    min-height: 100vh;
+    color: #f0f0ff;
   }
 
-  /* Pulso de brillo */
-  .animate-nova-pulse {
-    animation: novaPulse 3s ease-in-out infinite;
+  ::selection {
+    background-color: var(--color-nova-cyan);
+    color: black;
   }
-  @keyframes novaPulse {
-    0%, 100% { opacity: 0.6; }
-    50%       { opacity: 1; }
-  }
+}
+
+/* ── Estilos Forzados para Sileo Toaster ── */
+.sileo-toast-desc {
+  color: rgba(0, 0, 0, 0.8) !important;
+  font-size: 0.875rem !important;
 }
