@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import NavbarBotom from "./components/NavbarBotom";
 import AppRoutes from "./routes/AppRoutes.jsx";
 import { AuthProvider } from "./context/AuthContext";
+import { ProductProvider } from "./context/ProductContext";
 import { Toaster, sileo } from "sileo";
 
 function App() {
@@ -27,21 +28,23 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <div>
-          <Toaster
-            position="top-center"
-            options={{
-              duration: 3500,
-              styles: {
-                title: "sileo-toast-title",
-                description: "sileo-toast-desc"
-              }
-            }}
-          />
-          <Navbar />
-          <AppRoutes />
-          <NavbarBotom />
-        </div>
+        <ProductProvider>
+          <div>
+            <Toaster
+              position="top-center"
+              options={{
+                duration: 3500,
+                styles: {
+                  title: "sileo-toast-title",
+                  description: "sileo-toast-desc"
+                }
+              }}
+            />
+            <Navbar />
+            <AppRoutes />
+            <NavbarBotom />
+          </div>
+        </ProductProvider>
       </AuthProvider>
     </BrowserRouter>
   );

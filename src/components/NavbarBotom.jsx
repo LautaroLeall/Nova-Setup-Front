@@ -43,7 +43,7 @@ export function BottomNavBar({
     useEffect(() => {
         const handleScroll = () => {
             // Rutas donde NO queremos que aparezca el NavbarBotom
-            const hiddenRoutes = ["/login", "/register", "/perfil"];
+            const hiddenRoutes = ["/login", "/register", "/perfil", "/product"];
             const isHiddenRoute = hiddenRoutes.some(route => location.pathname.startsWith(route));
 
             if (isHiddenRoute) {
