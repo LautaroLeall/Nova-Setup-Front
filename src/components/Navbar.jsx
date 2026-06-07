@@ -1,15 +1,22 @@
 import { useState, useEffect, useContext } from "react";
 import { ShoppingCart, Search, Menu, X, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
-import "../styles/Navbar.css"; // NO OLVIDAR IMPORTAR EL CSS
+import { ProductContext } from "../context/ProductContext";
+import "../styles/Navbar.css";
 
 export const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [searchInput, setSearchInput] = useState("");
+    
     const { user, logout } = useContext(AuthContext);
+    const { handleSearch } = useContext(ProductContext);
+    
     const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -24,10 +31,19 @@ export const Navbar = () => {
 
     const navLinks = [
         { name: "Inicio",         to: "/" },
-        { name: "Productos",      to: "/shop" },
-        { name: "Teclados",       to: "/shop" },
-        { name: "Accesorios",     to: "/shop" },
+        { name: "Tienda",         to: "/shop" },
+        { name: "Categorías",     to: "/shop" },
     ];
+
+    const submitSearch = (e) => {
+        e.preventDefault();
+        if (searchInput.trim()) {
+            handleSearch(searchInput.trim());
+            navigate("/shop");
+            setIsSearchOpen(false);
+            setSearchInput("");
+        }
+    };
 
     // Rutas donde la Navbar Superior no debe aparecer
     const hiddenRoutes = ["/login", "/register"];
@@ -69,9 +85,35 @@ export const Navbar = () => {
 
                 {/* ── Actions ── */}
                 <div className="navbar-actions">
-                    <button className="navbar-action-btn">
-                        <Search size={19} />
-                    </button>
+                    <div className="navbar-search-container">
+                        <AnimatePresence>
+                            {isSearchOpen && (
+                                <motion.form
+                                    initial={{ width: 0, opacity: 0 }}
+                                    animate={{ width: "200px", opacity: 1 }}
+                                    exit={{ width: 0, opacity: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="navbar-search-form"
+                                    onSubmit={submitSearch}
+                                >
+                                    <input
+                                        type="text"
+                                        placeholder="Buscar..."
+                                        value={searchInput}
+                                        onChange={(e) => setSearchInput(e.target.value)}
+                                        className="navbar-search-input"
+                                        autoFocus
+                                    />
+                                </motion.form>
+                            )}
+                        </AnimatePresence>
+                        <button 
+                            className="navbar-action-btn"
+                            onClick={() => setIsSearchOpen(!isSearchOpen)}
+                        >
+                            {isSearchOpen ? <X size={19} /> : <Search size={19} />}
+                        </button>
+                    </div>
 
                     {/* Lógica de Usuario Desktop */}
                     {user ? (
