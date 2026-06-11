@@ -94,12 +94,6 @@
 
   ::selection {
     background-color: var(--color-nova-cyan);
-    color: black;
+    color: white;
   }
-}
-
-/* ── Estilos Forzados para Sileo Toaster ── */
-.sileo-toast-desc {
-  color: rgba(0, 0, 0, 0.8) !important;
-  font-size: 0.875rem !important;
 }
