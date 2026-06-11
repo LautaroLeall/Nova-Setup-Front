@@ -1,17 +1,25 @@
 import { Link } from "react-router";
 import { ShoppingCart } from "lucide-react";
 import { sileo } from "sileo";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 import "../styles/ProductCard.css";
 
 export const ProductCard = ({ product }) => {
   const { _id, name, brand, price, discountPrice, images, countInStock } = product;
 
+  const { addToCart } = useContext(CartContext);
+
   const handleAddToCart = (e) => {
     e.preventDefault();
     if (countInStock === 0) return;
     
-    sileo.success(`¡Agregado al carrito!`, {
-      description: `${name} ha sido añadido.`,
+    addToCart(product, 1);
+    
+    sileo.success({
+      title: "¡Producto Agregado!",
+      description: `1x ${name}`,
+      position: "bottom-right"
     });
   };
 
