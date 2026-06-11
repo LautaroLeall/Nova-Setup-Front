@@ -1,49 +1,35 @@
-import { useEffect } from "react";
 import { BrowserRouter } from "react-router";
 import Navbar from "./components/Navbar";
 import NavbarBotom from "./components/NavbarBotom";
 import AppRoutes from "./routes/AppRoutes.jsx";
 import { AuthProvider } from "./context/AuthContext";
 import { ProductProvider } from "./context/ProductContext";
-import { Toaster, sileo } from "sileo";
+import { CartProvider } from "./context/CartContext";
+import CartDrawer from "./components/CartDrawer";
+import { Toaster } from "sileo";
 
 function App() {
-  // Desaparecer notificaciones al hacer scroll o click
-  useEffect(() => {
-    const dismissToasts = () => {
-      sileo.clear();
-    };
-
-    window.addEventListener("scroll", dismissToasts, { passive: true });
-    window.addEventListener("mousedown", dismissToasts, { passive: true });
-    window.addEventListener("touchstart", dismissToasts, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", dismissToasts);
-      window.removeEventListener("mousedown", dismissToasts);
-      window.removeEventListener("touchstart", dismissToasts);
-    };
-  }, []);
-
   return (
     <BrowserRouter>
       <AuthProvider>
         <ProductProvider>
-          <div>
-            <Toaster
-              position="top-center"
-              options={{
-                duration: 3500,
-                styles: {
-                  title: "sileo-toast-title",
-                  description: "sileo-toast-desc"
-                }
-              }}
-            />
-            <Navbar />
-            <AppRoutes />
-            <NavbarBotom />
-          </div>
+          <CartProvider>
+            <div>
+              <Toaster
+                position="bottom-left"
+                offset="20px"
+                options={{
+                  duration: 3000,
+                  fill: "#171717",
+                  styles: { description: "text-white/75!" },
+                }}
+              />
+              <Navbar />
+              <CartDrawer />
+              <AppRoutes />
+              <NavbarBotom />
+            </div>
+          </CartProvider>
         </ProductProvider>
       </AuthProvider>
     </BrowserRouter>
