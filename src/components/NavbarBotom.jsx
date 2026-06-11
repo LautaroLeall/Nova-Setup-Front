@@ -9,12 +9,14 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router";
 import { AuthContext } from "../context/AuthContext";
+import { CartContext } from "../context/CartContext";
 import "../styles/NavbarBotom.css";
 
 export function BottomNavBar({
     className = "",
 }) {
     const { user } = useContext(AuthContext);
+    const { totalItems, toggleCart } = useContext(CartContext);
     const navigate = useNavigate();
     const location = useLocation();
     
@@ -22,7 +24,7 @@ export function BottomNavBar({
         { label: "Inicio", icon: Home, to: "/" },
         { label: "Productos", icon: LaptopMinimalCheck, to: "/shop" },
         { label: "Favoritos", icon: Heart, to: "/favoritos" },
-        { label: "Carrito", icon: ShoppingCart, to: "/carrito" },
+        { label: "Carrito", icon: ShoppingCart, isCart: true },
         { label: "Perfil", icon: User, to: user ? "/perfil" : "/login" },
     ];
 
@@ -66,8 +68,12 @@ export function BottomNavBar({
         return () => window.removeEventListener("scroll", handleScroll);
     }, [location.pathname]);
 
-    const handleNavigation = (idx, to) => {
-        navigate(to);
+    const handleNavigation = (item) => {
+        if (item.isCart) {
+            toggleCart();
+        } else {
+            navigate(item.to);
+        }
     };
 
     return (
@@ -88,15 +94,20 @@ export function BottomNavBar({
                             <button
                                 key={item.label}
                                 className={`bottom-nav-btn ${isActive ? "bottom-nav-btn-active" : "bottom-nav-btn-inactive"}`}
-                                onClick={() => handleNavigation(idx, item.to)}
+                                onClick={() => handleNavigation(item)}
                                 aria-label={item.label}
                                 type="button"
                             >
-                                <Icon
-                                    size={20}
-                                    strokeWidth={isActive ? 2.5 : 2}
-                                    className="bottom-nav-icon"
-                                />
+                                <div className="bottom-nav-icon-wrapper" style={{ position: "relative" }}>
+                                    <Icon
+                                        size={20}
+                                        strokeWidth={isActive ? 2.5 : 2}
+                                        className="bottom-nav-icon"
+                                    />
+                                    {item.isCart && totalItems > 0 && (
+                                        <span className="bottom-nav-badge">{totalItems}</span>
+                                    )}
+                                </div>
 
                                 <div
                                     className={`bottom-nav-label-container ${isActive ? "bottom-nav-label-active" : "bottom-nav-label-inactive"}`}

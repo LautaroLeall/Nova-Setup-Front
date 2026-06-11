@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { ProductContext } from "../context/ProductContext";
+import { CartContext } from "../context/CartContext";
 import "../styles/Navbar.css";
 
 export const Navbar = () => {
@@ -14,6 +15,7 @@ export const Navbar = () => {
     
     const { user, logout } = useContext(AuthContext);
     const { handleSearch } = useContext(ProductContext);
+    const { totalItems, toggleCart } = useContext(CartContext);
     
     const location = useLocation();
     const navigate = useNavigate();
@@ -135,9 +137,11 @@ export const Navbar = () => {
                         </Link>
                     )}
 
-                    <button className="navbar-cart-btn">
+                    <button className="navbar-cart-btn" onClick={toggleCart}>
                         <ShoppingCart size={19} />
-                        <span className="navbar-cart-badge">0</span>
+                        {totalItems > 0 && (
+                            <span className="navbar-cart-badge">{totalItems}</span>
+                        )}
                     </button>
 
                     <button
