@@ -94,3 +94,21 @@
   z-index: -10;
   background: linear-gradient(135deg, var(--color-nova-cyan) 0%, var(--color-nova-blue) 50%, var(--color-nova-purple) 100%);
 }
+
+.bottom-nav-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: linear-gradient(135deg, #ff4d4d, #b30000);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid rgba(16, 16, 24, 0.9);
+  z-index: 20;
+}
