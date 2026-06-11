@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import { ShoppingCart, ArrowLeft, Star, Package, ShieldCheck } from "lucide-react";
 import { sileo } from "sileo";
 import { motion } from "framer-motion";
+import { CartContext } from "../context/CartContext";
 import "../styles/ProductDetail.css";
 
 export const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addToCart } = useContext(CartContext);
   
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,10 +33,15 @@ export const ProductDetail = () => {
   }, [id]);
 
   const handleAddToCart = () => {
-    sileo.success(`¡Agregado al carrito!`, {
-      description: `${qty}x ${product.name} añadido exitosamente.`,
+    if (!product || product.countInStock === 0) return;
+    
+    addToCart(product, qty);
+    
+    sileo.success({
+      title: "¡Producto Agregado!",
+      description: `${qty}x ${product.name}`,
+      position: "bottom-right"
     });
-    // Lógica futura del CartContext
   };
 
   if (loading) {

@@ -1,0 +1,92 @@
+.nova-cart-toast {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  cursor: pointer;
+}
+
+.toast-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.toast-icon-success {
+  color: var(--color-nova-cyan);
+}
+
+.nova-cart-toast:hover .toast-header {
+  color: var(--color-nova-cyan);
+}
+
+.toast-expanded-info {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease, margin-top 0.4s ease;
+}
+
+/* Al hacer hover en el contenedor principal de la card */
+.nova-cart-toast:hover .toast-expanded-info {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 12px;
+}
+
+.toast-expanded-inner {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  padding: 0; /* padding se maneja dinámicamente con el height si es necesario, o lo dejamos fijo aquí */
+}
+
+.nova-cart-toast:hover .toast-expanded-inner {
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.toast-img-wrapper {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.toast-img-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  mix-blend-mode: screen;
+}
+
+.toast-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.toast-text strong {
+  color: white;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.toast-qty {
+  color: #aaa;
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
