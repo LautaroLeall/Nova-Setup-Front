@@ -19,7 +19,7 @@ export function BottomNavBar({
     const { totalItems, toggleCart } = useContext(CartContext);
     const navigate = useNavigate();
     const location = useLocation();
-    
+
     const navItems = [
         { label: "Inicio", icon: Home, to: "/" },
         { label: "Productos", icon: LaptopMinimalCheck, to: "/shop" },
@@ -45,7 +45,7 @@ export function BottomNavBar({
     useEffect(() => {
         const handleScroll = () => {
             // Rutas donde NO queremos que aparezca el NavbarBotom
-            const hiddenRoutes = ["/login", "/register", "/perfil", "/product"];
+            const hiddenRoutes = ["/login", "/register", "/perfil", "/product", "/checkout", "/payment"];
             const isHiddenRoute = hiddenRoutes.some(route => location.pathname.startsWith(route));
 
             if (isHiddenRoute) {
@@ -55,7 +55,7 @@ export function BottomNavBar({
 
             const MULTIPLICADOR = 3;
             const heroEnd = window.innerHeight * MULTIPLICADOR;
-            
+
             // Mostrar siempre la barra inferior en rutas distintas a la principal
             if (location.pathname !== "/") {
                 setIsVisible(true);
