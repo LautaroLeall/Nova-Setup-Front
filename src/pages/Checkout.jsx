@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
-import { ShoppingBag, MapPin, User, Phone, Lock, ChevronRight, CheckCircle2 } from "lucide-react";
+import { ShoppingBag, MapPin, User, Phone, Lock, ChevronRight, CheckCircle2, AlertCircle } from "lucide-react";
 import axios from "axios";
 import "../styles/Checkout.css";
 
@@ -212,7 +212,8 @@ const Checkout = () => {
 
               {error && (
                 <div className="checkout-error">
-                  <span>⚠️ {error}</span>
+                  <AlertCircle size={16} />
+                  <span>{error}</span>
                 </div>
               )}
 
@@ -290,7 +291,7 @@ const Checkout = () => {
               </div>
               <div className="summary-row">
                 <span>Envío</span>
-                <span className="free-shipping">Gratis 🎉</span>
+                <span className="free-shipping">Gratis</span>
               </div>
               <div className="summary-row total-row">
                 <span>Total</span>
