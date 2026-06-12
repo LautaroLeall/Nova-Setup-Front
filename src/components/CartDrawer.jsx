@@ -2,10 +2,11 @@ import { useContext, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Trash2, ShoppingBag } from "lucide-react";
 import { CartContext } from "../context/CartContext";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import "../styles/CartDrawer.css";
 
 export const CartDrawer = () => {
+  const navigate = useNavigate();
   const {
     isCartOpen,
     closeCart,
@@ -146,7 +147,10 @@ export const CartDrawer = () => {
                   <span className="subtotal-amount">${subtotal.toFixed(2)}</span>
                 </div>
                 <p className="cart-taxes-note">Impuestos y envío calculados en el checkout</p>
-                <button className="cart-checkout-btn">
+                <button
+                  className="cart-checkout-btn"
+                  onClick={() => { closeCart(); navigate("/checkout"); }}
+                >
                   Ir a Pagar
                 </button>
               </div>
