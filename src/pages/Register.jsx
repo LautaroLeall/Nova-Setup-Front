@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { motion } from "framer-motion";
 import { sileo } from "sileo";
-import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, AlertCircle } from "lucide-react";
 import "../styles/Register.css";
 
 const Register = () => {
@@ -100,7 +100,7 @@ const Register = () => {
                 />
               </div>
               {errors.firstName && (
-                <span className="register-error">⚠️ {errors.firstName.message}</span>
+                <span className="register-error"><AlertCircle size={14} /> {errors.firstName.message}</span>
               )}
             </div>
 
@@ -118,7 +118,7 @@ const Register = () => {
                 />
               </div>
               {errors.lastName && (
-                <span className="register-error">⚠️ {errors.lastName.message}</span>
+                <span className="register-error"><AlertCircle size={14} /> {errors.lastName.message}</span>
               )}
             </div>
           </div>
@@ -140,7 +140,7 @@ const Register = () => {
               />
             </div>
             {errors.email && (
-              <span className="register-error">⚠️ {errors.email.message}</span>
+              <span className="register-error"><AlertCircle size={14} /> {errors.email.message}</span>
             )}
           </div>
 
@@ -167,7 +167,7 @@ const Register = () => {
               </button>
             </div>
             {errors.password && (
-              <span className="register-error">⚠️ {errors.password.message}</span>
+              <span className="register-error"><AlertCircle size={14} /> {errors.password.message}</span>
             )}
           </div>
 
@@ -194,7 +194,7 @@ const Register = () => {
               </button>
             </div>
             {errors.confirmPassword && (
-              <span className="register-error">⚠️ {errors.confirmPassword.message}</span>
+              <span className="register-error"><AlertCircle size={14} /> {errors.confirmPassword.message}</span>
             )}
           </div>
 
