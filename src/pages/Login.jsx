@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { motion } from "framer-motion";
 import { sileo } from "sileo";
-import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, AlertCircle } from "lucide-react";
 import "../styles/Login.css";
 
 const Login = () => {
@@ -97,7 +97,7 @@ const Login = () => {
               />
             </div>
             {errors.email && (
-              <span className="login-error">⚠️ {errors.email.message}</span>
+              <span className="login-error"><AlertCircle size={14} /> {errors.email.message}</span>
             )}
           </div>
 
@@ -121,7 +121,7 @@ const Login = () => {
               </button>
             </div>
             {errors.password && (
-              <span className="login-error">⚠️ {errors.password.message}</span>
+              <span className="login-error"><AlertCircle size={14} /> {errors.password.message}</span>
             )}
           </div>
 
