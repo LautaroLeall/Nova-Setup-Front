@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react";
-import { useSearchParams, Link } from "react-router";
+import { useSearchParams, Link, Navigate } from "react-router";
 import { motion } from "framer-motion";
 import { CheckCircle2, ShoppingBag, Package } from "lucide-react";
 import { CartContext } from "../context/CartContext";
@@ -11,10 +11,17 @@ const OrderSuccess = () => {
 
   const paymentId = searchParams.get("payment_id");
   const externalRef = searchParams.get("external_reference"); // El orderId
+  const preferenceId = searchParams.get("preference_id");
 
   useEffect(() => {
-    clearCart();
-  }, [clearCart]);
+    if (paymentId || externalRef || preferenceId) {
+      clearCart();
+    }
+  }, [clearCart, paymentId, externalRef, preferenceId]);
+
+  if (!paymentId && !externalRef && !preferenceId) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <div className="order-result-page">
