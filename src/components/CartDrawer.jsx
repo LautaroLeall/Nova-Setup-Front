@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Trash2, ShoppingBag } from "lucide-react";
 import { CartContext } from "../context/CartContext";
 import { Link, useNavigate } from "react-router";
+import { showConfirmDialog } from "../utils/swalConfig";
 import "../styles/CartDrawer.css";
 
 export const CartDrawer = () => {
@@ -27,6 +28,31 @@ export const CartDrawer = () => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isCartOpen, closeCart]);
+
+  const handleClearCart = async () => {
+    const result = await showConfirmDialog(
+      "¿Vaciar carrito?",
+      "¿Estás seguro de que deseas eliminar todos los productos?",
+      "Sí, vaciar",
+      "Cancelar"
+    );
+    if (result.isConfirmed) {
+      clearCart();
+    }
+  };
+
+  const handleCheckout = async () => {
+    const result = await showConfirmDialog(
+      "¿Proceder al pago?",
+      "¿Estás listo para finalizar tu compra?",
+      "Ir a pagar",
+      "Cancelar"
+    );
+    if (result.isConfirmed) {
+      closeCart();
+      navigate("/checkout");
+    }
+  };
 
   // Prevenir scroll del body cuando el carrito está abierto
   useEffect(() => {
@@ -63,7 +89,7 @@ export const CartDrawer = () => {
               <h2>Tu Carrito</h2>
               <div className="cart-header-actions">
                 {cartItems.length > 0 && (
-                  <button className="cart-clear-all-btn" onClick={clearCart} title="Vaciar carrito completo">
+                  <button className="cart-clear-all-btn" onClick={handleClearCart} title="Vaciar carrito completo">
                     <Trash2 size={18} />
                   </button>
                 )}
@@ -149,7 +175,7 @@ export const CartDrawer = () => {
                 <p className="cart-taxes-note">Impuestos y envío calculados en el checkout</p>
                 <button
                   className="cart-checkout-btn"
-                  onClick={() => { closeCart(); navigate("/checkout"); }}
+                  onClick={handleCheckout}
                 >
                   Ir a Pagar
                 </button>
