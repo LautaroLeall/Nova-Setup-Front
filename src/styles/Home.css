@@ -1,87 +1,270 @@
-.home-section-products {
-  padding: 8rem 1.5rem;
-  max-width: 80rem;
-  margin-left: auto;
-  margin-right: auto;
-}
+/* ----------------------------------------------------------------------------
+   HOME PAGE STYLES — Nova SetUp (REDESIGNED)
+   ---------------------------------------------------------------------------- */
 
-.home-section-title {
-  font-size: 1.875rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
-  letter-spacing: -0.05em;
-}
-
-@media (min-width: 768px) {
-  .home-section-title {
-    font-size: 3rem;
-  }
-}
-
-.home-products-grid {
-  display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 2rem;
-}
-
-@media (min-width: 768px) {
-  .home-products-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.home-product-card {
-  aspect-ratio: 1 / 1;
+.home-page-container {
   background-color: var(--color-nova-bg);
-  border-radius: 1.5rem;
-  border: 1px solid var(--color-nova-dark);
-  transition: border-color 0.15s ease;
-  overflow: hidden;
+  /* overflow-x: hidden; REMOVED BECAUSE IT BREAKS POSITION: STICKY FOR HERO AND ASSEMBLY */
+}
+
+/* -- Animación 2.5D (Setup Assembly) -- */
+.home-assembly-section {
   position: relative;
+  height: 600vh; /* Permite un scroll largo para animar */
+  width: 100%;
 }
 
-.home-product-card:hover {
-  border-color: rgba(58, 219, 241, 0.5);
-  /* var(--color-nova-cyan) / 50% */
-}
-
-.home-product-overlay {
-  position: absolute;
+.assembly-sticky-container {
+  position: sticky;
   top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: linear-gradient(to top, black, transparent);
-  opacity: 0.6;
-}
-
-.home-product-info {
-  position: absolute;
-  bottom: 2rem;
-  left: 2rem;
-}
-
-.home-product-category {
-  font-family: monospace;
-  font-size: 0.875rem;
-  margin-bottom: 0.5rem;
-  color: var(--color-nova-light);
-}
-
-.home-product-name {
-  font-size: 1.5rem;
-  line-height: 2rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: white;
-}
-
-.home-section-footer {
   height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom, #000000, var(--color-nova-bg));
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(16, 16, 24, 0) 0%, var(--color-nova-bg) 100%);
+}
+
+.assembly-intro-text, .assembly-outro-text {
+  position: absolute;
+  text-align: center;
+  z-index: 20;
+}
+
+.assembly-intro-text h2, .assembly-outro-text h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  color: white;
+  letter-spacing: 0.1em;
+}
+
+.assembly-intro-text span, .assembly-outro-text span {
+  color: var(--color-nova-cyan);
+}
+
+.assembly-intro-text p, .assembly-outro-text p {
+  color: #888;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+.assembly-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.assembly-piece {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.piece-glow {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  border-radius: 50%;
+  filter: blur(40px);
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.neon-blue { background: #3b82f6; }
+.neon-cyan { background: var(--color-nova-cyan); }
+.neon-pink { background: #ec4899; }
+.neon-purple { background: #8b5cf6; }
+
+/* -- Manifesto Section (Historia y Qué Hacemos) -- */
+.home-manifesto-section {
+  padding: 10rem 2rem;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.manifesto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .manifesto-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+/* Text Column (Sticky) */
+.manifesto-text-col {
+  position: relative;
+  height: 100%;
+}
+
+.manifesto-sticky {
+  position: sticky;
+  top: 6rem;
+}
+
+.manifesto-subtitle {
+  color: var(--color-nova-cyan);
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.manifesto-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.manifesto-title span {
+  color: var(--color-nova-cyan);
+}
+
+.manifesto-desc {
+  font-size: 1.25rem;
+  color: #888;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+/* Pillars Column */
+.manifesto-pillars-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.pillar-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 2rem;
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s ease;
+}
+
+.pillar-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.pillar-icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cyan-box {
+  background: rgba(58, 219, 241, 0.15);
+  color: var(--color-nova-cyan);
+}
+
+.purple-box {
+  background: rgba(168, 85, 247, 0.15);
+  color: #a855f7;
+}
+
+.pink-box {
+  background: rgba(244, 63, 94, 0.15);
+  color: #f43f5e;
+}
+
+.pillar-content h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+
+.pillar-content p {
+  font-size: 1.1rem;
+  color: #999;
+  line-height: 1.6;
+}
+
+/* -- Section CTA (Botón Magnético) -- */
+.home-section-cta {
+  padding: 10rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cta-glow-main {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(58, 219, 241, 0.15) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.cta-content-wrapper {
+  text-align: center;
+  z-index: 10;
+}
+
+.cta-content-wrapper h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.cta-content-wrapper p {
+  color: #888;
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 3rem auto;
+}
+
+.btn-magnetic-cta {
+  background: white;
+  color: black;
+  border: none;
+  padding: 1.5rem 3rem;
+  border-radius: 999px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+}
+
+/* -- Decorative Footer -- */
+.home-section-footer {
+  padding: 6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, #000000, #040409);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .home-footer-text-container {
@@ -91,9 +274,10 @@
 .home-footer-title {
   font-size: 3rem;
   font-weight: 900;
-  letter-spacing: -0.05em;
-  color: var(--color-nova-cyan);
-  opacity: 0.05;
+  letter-spacing: 0.15em;
+  background: linear-gradient(to bottom, rgba(58, 219, 241, 0.08) 0%, transparent 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @media (min-width: 768px) {

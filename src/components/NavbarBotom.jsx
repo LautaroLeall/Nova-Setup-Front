@@ -45,7 +45,7 @@ export function BottomNavBar({
     useEffect(() => {
         const handleScroll = () => {
             // Rutas donde NO queremos que aparezca el NavbarBotom
-            const hiddenRoutes = ["/login", "/register", "/perfil", "/product", "/checkout", "/payment"];
+            const hiddenRoutes = ["/login", "/register", "/perfil", "/product", "/checkout", "/payment", "/forgot-password", "/reset-password", "/admin"];
             const isHiddenRoute = hiddenRoutes.some(route => location.pathname.startsWith(route));
 
             if (isHiddenRoute) {
@@ -53,7 +53,7 @@ export function BottomNavBar({
                 return;
             }
 
-            const MULTIPLICADOR = 3;
+            const MULTIPLICADOR = 3.5;
             const heroEnd = window.innerHeight * MULTIPLICADOR;
 
             // Mostrar siempre la barra inferior en rutas distintas a la principal

@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { ShoppingCart, Search, Menu, X, User } from "lucide-react";
+import { ShoppingCart, Search, Menu, X, User, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
@@ -28,8 +28,11 @@ export const Navbar = () => {
 
     // Cierra el menú móvil si cambia de ruta
     useEffect(() => {
-        setIsMobileMenuOpen(false);
-    }, [location.pathname]);
+        if (isMobileMenuOpen) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            setIsMobileMenuOpen(false);
+        }
+    }, [location.pathname, isMobileMenuOpen]);
 
     const navLinks = [
         { name: "Inicio",         to: "/" },
@@ -48,7 +51,7 @@ export const Navbar = () => {
     };
 
     // Rutas donde la Navbar Superior no debe aparecer
-    const hiddenRoutes = ["/login", "/register"];
+    const hiddenRoutes = ["/login", "/register", "/forgot-password", "/reset-password"];
     if (hiddenRoutes.some(route => location.pathname.startsWith(route))) {
         return null;
     }
@@ -124,8 +127,16 @@ export const Navbar = () => {
                                 <User size={19} />
                                 <span>{user.firstName}</span>
                             </button>
-                            {/* Dropdown Logout */}
+                            {/* Dropdown */}
                             <div className="navbar-user-dropdown">
+                                <Link to="/perfil" className="navbar-dropdown-link">
+                                    Mi Perfil
+                                </Link>
+                                {user.isAdmin && (
+                                    <Link to="/admin/dashboard" className="navbar-dropdown-link">
+                                        Panel Admin
+                                    </Link>
+                                )}
                                 <button onClick={logout} className="navbar-logout-btn">
                                     Cerrar Sesión
                                 </button>
