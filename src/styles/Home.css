@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
-   HOME PAGE STYLES — Nova SetUp (REDESIGNED)
+   HOME PAGE STYLES - Nova SetUp (REDESIGNED)
    ---------------------------------------------------------------------------- */
 
 .home-page-container {
@@ -7,7 +7,7 @@
   /* overflow-x: hidden; REMOVED BECAUSE IT BREAKS POSITION: STICKY FOR HERO AND ASSEMBLY */
 }
 
-/* -- Animación 2.5D (Setup Assembly) -- */
+/* -- Animacion 2.5D (Setup Assembly) -- */
 .home-assembly-section {
   position: relative;
   height: 600vh; /* Permite un scroll largo para animar */
@@ -81,7 +81,7 @@
 .neon-pink { background: #ec4899; }
 .neon-purple { background: #8b5cf6; }
 
-/* -- Manifesto Section (Historia y Qué Hacemos) -- */
+/* -- Manifesto Section (Historia y Que Hacemos) -- */
 .home-manifesto-section {
   padding: 10rem 2rem;
   max-width: 1300px;
@@ -206,7 +206,7 @@
   line-height: 1.6;
 }
 
-/* -- Section CTA (Botón Magnético) -- */
+/* -- Section CTA (Boton Magnetico) -- */
 .home-section-cta {
   padding: 10rem 2rem;
   display: flex;
