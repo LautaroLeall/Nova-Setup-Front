@@ -1,9 +1,18 @@
-import { Link } from "react-router";
+import { useSearchParams, Link, Navigate } from "react-router";
 import { motion } from "framer-motion";
 import { XCircle, ShoppingBag, RotateCcw } from "lucide-react";
 import "../styles/OrderResult.css";
 
 const OrderFailure = () => {
+  const [searchParams] = useSearchParams();
+  const paymentId = searchParams.get("payment_id");
+  const externalRef = searchParams.get("external_reference");
+  const preferenceId = searchParams.get("preference_id");
+
+  if (!paymentId && !externalRef && !preferenceId) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <div className="order-result-page">
       <motion.div

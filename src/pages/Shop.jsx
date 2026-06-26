@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import { ProductContext } from "../context/ProductContext";
-import ProductCard from "../components/ProductCard";
-import { Search, X, Filter } from "lucide-react";
+import ProductCard from "../components/product/ProductCard";
+import { ShopFilters } from "../components/shop/ShopFilters";
+import Footer from "../components/layout/Footer";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/Shop.css";
 
@@ -11,12 +13,13 @@ export const Shop = () => {
     loading,
     error,
     searchKeyword,
-    activeCategory,
-    handleSearch,
     handleCategoryFilter,
+    page,
+    totalPages,
+    handlePageChange,
+    totalProducts,
+    filteredCount
   } = useContext(ProductContext);
-
-  const categories = ["Todos", "Teclados", "Monitores", "Ratones", "Audio", "Accesorios"];
 
   // Variantes para la animación en cascada (stagger)
   const containerVariants = {
@@ -31,19 +34,48 @@ export const Shop = () => {
 
   const itemVariants = {
     hidden: { y: 50, opacity: 0 },
-    visible: { 
-      y: 0, 
+    visible: {
+      y: 0,
       opacity: 1,
       transition: { type: "spring", stiffness: 100, damping: 15 }
     }
   };
 
-  const onCategoryClick = (cat) => {
-    if (cat === "Todos") {
-      handleCategoryFilter("");
-    } else {
-      handleCategoryFilter(cat);
+  const renderPagination = () => {
+    if (totalPages <= 1) return null;
+
+    const pages = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(
+        <button
+          key={i}
+          className={`shop-page-btn ${page === i ? "active" : ""}`}
+          onClick={() => handlePageChange(i)}
+        >
+          {i}
+        </button>
+      );
     }
+
+    return (
+      <div className="shop-pagination">
+        <button
+          className="shop-page-btn prev-next"
+          disabled={page === 1}
+          onClick={() => handlePageChange(page - 1)}
+        >
+          <ChevronLeft size={18} />
+        </button>
+        {pages}
+        <button
+          className="shop-page-btn prev-next"
+          disabled={page === totalPages}
+          onClick={() => handlePageChange(page + 1)}
+        >
+          <ChevronRight size={18} />
+        </button>
+      </div>
+    );
   };
 
   return (
@@ -54,54 +86,8 @@ export const Shop = () => {
       </div>
 
       <div className="shop-container">
-        {/* Barra Lateral de Filtros */}
-        <aside className="shop-sidebar">
-          <div className="shop-sidebar-box">
-            <h3 className="shop-sidebar-title">
-              <Filter size={18} /> Categorías
-            </h3>
-            <ul className="shop-category-list">
-              {categories.map((cat) => (
-                <li key={cat}>
-                  <button
-                    className={`shop-category-btn ${
-                      (cat === "Todos" && activeCategory === "") || activeCategory === cat
-                        ? "active"
-                        : ""
-                    }`}
-                    onClick={() => onCategoryClick(cat)}
-                  >
-                    {cat}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Buscador de barra lateral (opcional) */}
-          <div className="shop-sidebar-box">
-            <h3 className="shop-sidebar-title">
-              <Search size={18} /> Búsqueda
-            </h3>
-            <div className="shop-search-box">
-              <input
-                type="text"
-                placeholder="Buscar producto..."
-                value={searchKeyword}
-                onChange={(e) => handleSearch(e.target.value)}
-                className="shop-search-input"
-              />
-              {searchKeyword && (
-                <button
-                  className="shop-search-clear"
-                  onClick={() => handleSearch("")}
-                >
-                  <X size={16} />
-                </button>
-              )}
-            </div>
-          </div>
-        </aside>
+        {/* Componente de Filtros */}
+        <ShopFilters />
 
         {/* Grid de Productos */}
         <main className="shop-main">
@@ -125,19 +111,21 @@ export const Shop = () => {
             <div className="shop-empty">
               <h2>No se encontraron productos</h2>
               <p>Intenta cambiar los filtros o los términos de búsqueda.</p>
-              <button onClick={() => onCategoryClick("Todos")} className="btn-primary">
+              <button onClick={() => handleCategoryFilter("")} className="btn-primary">
                 Ver todo el catálogo
               </button>
             </div>
           ) : (
             <>
               <div className="shop-results-info">
-                Mostrando {products.length} productos
+                Mostrando {products.length} de {filteredCount} productos
+                {filteredCount !== totalProducts && (
+                  <span className="total-catalog-info"> (de {totalProducts} en total)</span>
+                )}
                 {searchKeyword && <span> para "{searchKeyword}"</span>}
-                {activeCategory && <span> en {activeCategory}</span>}
               </div>
-              
-              <motion.div 
+
+              <motion.div
                 className="shop-grid"
                 variants={containerVariants}
                 initial="hidden"
@@ -151,10 +139,15 @@ export const Shop = () => {
                   ))}
                 </AnimatePresence>
               </motion.div>
+
+              {renderPagination()}
             </>
           )}
         </main>
       </div>
+
+      {/* Footer General */}
+      <Footer />
     </div>
   );
 };

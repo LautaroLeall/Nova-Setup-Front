@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router";
 import axios from "axios";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/product/ProductCard";
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/Shop.css";
 
@@ -19,7 +19,7 @@ const Favoritos = () => {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setFavorites(data);
-    } catch (err) {
+    } catch {
       setError("Error al cargar tus favoritos.");
     } finally {
       setLoading(false);
@@ -27,15 +27,19 @@ const Favoritos = () => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (user) fetchFavorites();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   // Sincronizar la lista local cuando cambia favoriteIds en el contexto
   // (cuando el usuario quita un favorito desde otra página)
   useEffect(() => {
     if (favorites.length > 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFavorites(prev => prev.filter(p => favoriteIds.includes(p._id)));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [favoriteIds]);
 
   // Animaciones (iguales a Shop)
