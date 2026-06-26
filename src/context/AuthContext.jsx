@@ -1,13 +1,17 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useState, useEffect } from "react";
-import axios from "axios";
+import { createContext, useState, useEffect, useMemo, useCallback } from "react";
+import api from "../services/api";
 import { showConfirmDialog } from "../utils/swalConfig";
 
 export const AuthContext = createContext();
 
+const handleError = (error, defaultMessage) => {
+  if (!error.response) return "El servidor no responde. ¿El backend está levantado?";
+  return error.response?.data?.message || defaultMessage;
+};
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    // Inicialización directa para evitar renderizados en cascada (error ESLint)
     const userInfo = localStorage.getItem("userInfo");
     return userInfo ? JSON.parse(userInfo) : null;
   });
@@ -15,95 +19,63 @@ export const AuthProvider = ({ children }) => {
   const [favoriteIds, setFavoriteIds] = useState([]);
 
   useEffect(() => {
+    let isMounted = true;
+
     if (user) {
       const fetchFavorites = async () => {
         try {
-          const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/favorites`, {
-            headers: { Authorization: `Bearer ${user.token}` }
-          });
-          // data es un array de productos populados — extraemos solo los _id como strings
-          setFavoriteIds(data.map(p => p._id.toString()));
+          const { data } = await api.get(`/api/favorites`);
+          if (isMounted) {
+            setFavoriteIds(data.map(p => p._id.toString()));
+          }
         } catch (err) {
           console.error("Error cargando favoritos:", err.response?.data || err.message);
         }
       };
       fetchFavorites();
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFavoriteIds([]);
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [user]);
 
-  const login = async (email, password) => {
+  const login = useCallback(async (email, password) => {
     try {
-      const config = { headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/users/login`,
-        { email, password },
-        config
-      );
-
+      const { data } = await api.post(`/api/users/login`, { email, password });
       setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       return { success: true };
     } catch (error) {
-      // Diferenciar entre error de red (backend no levantado) y error de credenciales
-      let errorMessage = "Ocurrió un error inesperado.";
-      if (!error.response) {
-        errorMessage = "El servidor no responde. ¿El backend está levantado?";
-      } else if (error.response.data && error.response.data.message) {
-        errorMessage = error.response.data.message;
-      }
-      return { success: false, error: errorMessage };
+      return { success: false, error: handleError(error, "Ocurrió un error inesperado al iniciar sesión.") };
     }
-  };
+  }, []);
 
-  const register = async (firstName, lastName, email, password) => {
+  const register = useCallback(async (firstName, lastName, email, password) => {
     try {
-      const config = { headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/users/register`,
-        { firstName, lastName, email, password },
-        config
-      );
-
-      setUser(null); // No guardamos el usuario porque ahora requiere verificación de email
-      // localStorage.setItem("userInfo", JSON.stringify(data));
+      const { data } = await api.post(`/api/users/register`, { firstName, lastName, email, password });
+      setUser(null);
       return { success: true, message: data.message };
     } catch (error) {
-      let errorMessage = "Ocurrió un error inesperado.";
-      if (!error.response) {
-        errorMessage = "El servidor no responde. ¿El backend está levantado?";
-      } else if (error.response.data && error.response.data.message) {
-        errorMessage = error.response.data.message;
-      }
-      return { success: false, error: errorMessage };
+      return { success: false, error: handleError(error, "Ocurrió un error inesperado al registrarse.") };
     }
-  };
+  }, []);
 
-  const googleLogin = async (tokenId) => {
+  const googleLogin = useCallback(async (tokenId) => {
     try {
-      const config = { headers: { "Content-Type": "application/json" } };
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/users/google-auth`,
-        { tokenId },
-        config
-      );
-
+      const { data } = await api.post(`/api/users/google-auth`, { tokenId });
       setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       return { success: true };
     } catch (error) {
-      let errorMessage = "Ocurrió un error inesperado al iniciar sesión con Google.";
-      if (!error.response) {
-        errorMessage = "El servidor no responde. ¿El backend está levantado?";
-      } else if (error.response.data && error.response.data.message) {
-        errorMessage = error.response.data.message;
-      }
-      return { success: false, error: errorMessage };
+      return { success: false, error: handleError(error, "Ocurrió un error inesperado al iniciar sesión con Google.") };
     }
-  };
+  }, []);
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     const result = await showConfirmDialog(
       "¿Cerrar Sesión?",
       "¿Estás seguro que deseas salir de tu cuenta?",
@@ -111,55 +83,53 @@ export const AuthProvider = ({ children }) => {
       "Cancelar"
     );
     if (result.isConfirmed) {
-      localStorage.removeItem("userInfo");
-      setUser(null);
-      setFavoriteIds([]);
+      try {
+        await api.post(`/api/users/logout`);
+      } catch (err) {
+        console.error("Error al hacer logout en servidor:", err);
+      } finally {
+        localStorage.removeItem("userInfo");
+        setUser(null);
+        setFavoriteIds([]);
+      }
     }
-  };
+  }, []);
 
-  const updateUserProfile = async (profileData) => {
+  const updateUserProfile = useCallback(async (profileData) => {
     try {
-      const config = { 
-        headers: { 
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`
-        } 
-      };
-      const { data } = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/api/users/profile`,
-        profileData,
-        config
-      );
-
+      const { data } = await api.put(`/api/users/profile`, profileData);
       setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       return { success: true };
     } catch (error) {
-      let errorMessage = "Ocurrió un error inesperado al actualizar el perfil.";
-      if (error.response && error.response.data && error.response.data.message) {
-        errorMessage = error.response.data.message;
-      }
-      return { success: false, error: errorMessage };
+      return { success: false, error: handleError(error, "Ocurrió un error al actualizar el perfil.") };
     }
-  };
+  }, []);
 
-  const toggleFavorite = async (productId) => {
+  const toggleFavorite = useCallback(async (productId) => {
     if (!user) return;
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/favorites/${productId}`,
-        {},
-        { headers: { Authorization: `Bearer ${user.token}` } }
-      );
-      // data es un array de IDs strings devuelto por el servidor
+      const { data } = await api.post(`/api/favorites/${productId}`);
       setFavoriteIds(data);
     } catch (err) {
       console.error("Error toggling favorite:", err.response?.data || err.message);
     }
-  };
+  }, [user]);
+
+  const value = useMemo(() => ({
+    user,
+    loading,
+    favoriteIds,
+    login,
+    register,
+    googleLogin,
+    logout,
+    toggleFavorite,
+    updateUserProfile
+  }), [user, loading, favoriteIds, login, register, googleLogin, logout, toggleFavorite, updateUserProfile]);
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, googleLogin, logout, favoriteIds, toggleFavorite, updateUserProfile }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

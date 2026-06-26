@@ -1,10 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback, useMemo } from "react";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  // Inicializamos el estado leyendo de localStorage (si existe)
   const [cartItems, setCartItems] = useState(() => {
     try {
       const storedData = localStorage.getItem("nova_cart");
@@ -17,7 +16,6 @@ export const CartProvider = ({ children }) => {
 
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // Cada vez que cambien los cartItems, sincronizamos con localStorage
   useEffect(() => {
     try {
       localStorage.setItem("nova_cart", JSON.stringify(cartItems));
@@ -26,75 +24,66 @@ export const CartProvider = ({ children }) => {
     }
   }, [cartItems]);
 
-  const toggleCart = () => setIsCartOpen((prev) => !prev);
-  const openCart = () => setIsCartOpen(true);
-  const closeCart = () => setIsCartOpen(false);
+  const toggleCart = useCallback(() => setIsCartOpen((prev) => !prev), []);
+  const openCart = useCallback(() => setIsCartOpen(true), []);
+  const closeCart = useCallback(() => setIsCartOpen(false), []);
 
-  // Agregar producto al carrito
-  const addToCart = (product, quantity = 1) => {
+  const addToCart = useCallback((product, quantity = 1) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item._id === product._id);
-      
       if (existingItem) {
-        // Actualizamos cantidad respetando el stock disponible
         return prevItems.map((item) =>
           item._id === product._id
             ? { ...item, qty: Math.min(item.qty + quantity, product.countInStock) }
             : item
         );
       } else {
-        // Agregamos el nuevo producto
         return [...prevItems, { ...product, qty: quantity }];
       }
     });
-  };
+  }, []);
 
-  // Remover un producto del carrito
-  const removeFromCart = (id) => {
+  const removeFromCart = useCallback((id) => {
     setCartItems((prevItems) => prevItems.filter((item) => item._id !== id));
-  };
+  }, []);
 
-  // Actualizar la cantidad (+ o -)
-  const updateQuantity = (id, newQty, maxStock) => {
-    if (newQty <= 0) return; // No bajar de 1
-    if (newQty > maxStock) return; // No superar stock
-    
+  const updateQuantity = useCallback((id, newQty, maxStock) => {
+    if (newQty <= 0) return;
+    if (newQty > maxStock) return;
     setCartItems((prevItems) =>
       prevItems.map((item) =>
         item._id === id ? { ...item, qty: newQty } : item
       )
     );
-  };
+  }, []);
 
-  // Limpiar carrito completo (ej: después de pagar)
-  const clearCart = () => {
+  const clearCart = useCallback(() => {
     setCartItems([]);
-  };
+  }, []);
 
-  // Calcular totales
-  const totalItems = cartItems.reduce((acc, item) => acc + item.qty, 0);
-  
-  const subtotal = cartItems.reduce((acc, item) => {
+  const totalItems = useMemo(() => cartItems.reduce((acc, item) => acc + item.qty, 0), [cartItems]);
+
+  const subtotal = useMemo(() => cartItems.reduce((acc, item) => {
     const price = item.discountPrice ? item.discountPrice : item.price;
     return acc + price * item.qty;
-  }, 0);
+  }, 0), [cartItems]);
+
+  const value = useMemo(() => ({
+    cartItems,
+    isCartOpen,
+    toggleCart,
+    openCart,
+    closeCart,
+    addToCart,
+    removeFromCart,
+    updateQuantity,
+    clearCart,
+    totalItems,
+    subtotal
+  }), [cartItems, isCartOpen, toggleCart, openCart, closeCart, addToCart, removeFromCart, updateQuantity, clearCart, totalItems, subtotal]);
 
   return (
-    <CartContext.Provider
-      value={{
-        cartItems,
-        isCartOpen,
-        toggleCart,
-        openCart,
-        closeCart,
-        addToCart,
-        removeFromCart,
-        updateQuantity,
-        clearCart,
-        totalItems,
-        subtotal
-      }}
-    >
+    <CartContext.Provider value={value}>
       {children}
     </CartContext.Provider>
   );

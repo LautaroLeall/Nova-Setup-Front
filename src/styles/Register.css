@@ -236,7 +236,7 @@
   color: #4b5563;
 }
 
-.register-password-input{
+.register-password-input {
   padding-right: 2.5rem;
 }
 
@@ -263,7 +263,8 @@
   justify-content: center;
   transition: color 0.2s;
   padding: 0;
-  margin-top: 0.25rem; /* Ajuste para alinear con el input ya que el label está arriba */
+  margin-top: 0.25rem;
+  /* Ajuste para alinear con el input ya que el label está arriba */
 }
 
 .register-eye-btn:hover {

@@ -1,5 +1,6 @@
 .product-detail-page {
-  padding-top: 100px; /* Navbar */
+  padding-top: 100px;
+  /* Navbar */
   padding-bottom: 5rem;
   min-height: 100vh;
   background-color: var(--color-nova-bg);
@@ -9,7 +10,8 @@
   padding-inline: 1.5rem;
 }
 
-.loader-container, .error-container {
+.loader-container,
+.error-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +29,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .back-btn {
@@ -128,8 +132,13 @@
   transform: translateY(-50%) scale(1.1);
 }
 
-.carousel-arrow.left { left: 1rem; }
-.carousel-arrow.right { right: 1rem; }
+.carousel-arrow.left {
+  left: 1rem;
+}
+
+.carousel-arrow.right {
+  right: 1rem;
+}
 
 .carousel-dots {
   position: absolute;
@@ -207,7 +216,8 @@
   .detail-sticky-column {
     width: 40%;
     position: sticky;
-    top: 100px; /* Offset del navbar */
+    top: 100px;
+    /* Offset del navbar */
   }
 }
 
@@ -255,6 +265,7 @@
   line-height: 1.1;
   background: linear-gradient(135deg, white 0%, #ccc 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -325,7 +336,114 @@
   display: flex;
   align-items: center;
   background: rgba(16, 16, 24, 0.8);
-  border-radius: 9999px; /* Pill shape */
+  border-radius: 9999px;
+  /* Pill shape */
+  border: 1px solid rgba(58, 219, 241, 0.3);
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.qty-controls button {
+  background: transparent;
+  color: var(--color-nova-cyan);
+  border: none;
+  padding: 0.4rem 1.2rem;
+  font-size: 1.4rem;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qty-controls button:hover:not(:disabled) {
+  background: rgba(58, 219, 241, 0.15);
+  color: white;
+}
+
+.qty-controls button:disabled {
+  color: rgba(255, 255, 255, 0.2);
+  cursor: not-allowed;
+}
+
+.qty-controls input {
+  background: transparent;
+  border: none;
+  color: white;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.buy-description {
+  color: #a0a0a0;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.buy-price-section {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.price-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.current-price {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: white;
+}
+
+.old-price {
+  font-size: 1.25rem;
+  color: #666;
+  text-decoration: line-through;
+}
+
+.discount-badge {
+  background: linear-gradient(135deg, #ff4d4d 0%, #b30000 100%);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+.buy-stock-status {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.stock-in {
+  color: #4ade80;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stock-out {
+  color: #ef4444;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.buy-qty-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+  background: rgba(16, 16, 24, 0.8);
+  border-radius: 9999px;
+  /* Pill shape */
   border: 1px solid rgba(58, 219, 241, 0.3);
   overflow: hidden;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -364,13 +482,16 @@
   font-size: 1.1rem;
   font-weight: 700;
   outline: none;
-  -moz-appearance: textfield; /* Hide arrows Firefox */
+  -moz-appearance: textfield;
+  appearance: textfield;
+  /* Hide arrows Firefox */
 }
 
 /* Hide arrows Chrome/Safari */
 .qty-controls input::-webkit-outer-spin-button,
 .qty-controls input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
 
@@ -621,8 +742,13 @@
   transform: translateY(-50%) scale(1.2);
 }
 
-.modal-arrow.left { left: -3rem; }
-.modal-arrow.right { right: -3rem; }
+.modal-arrow.left {
+  left: -3rem;
+}
+
+.modal-arrow.right {
+  right: -3rem;
+}
 
 .modal-thumbnails {
   position: absolute;

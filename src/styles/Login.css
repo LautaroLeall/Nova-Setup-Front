@@ -235,7 +235,7 @@
   color: #4b5563;
 }
 
-.login-password-input{
+.login-password-input {
   padding-right: 2.5rem;
 }
 
@@ -264,7 +264,8 @@
   justify-content: center;
   transition: color 0.2s;
   padding: 0;
-  margin-top: 0.375rem; /* Ajuste para alinear con el input ya que el label está arriba */
+  margin-top: 0.375rem;
+  /* Ajuste para alinear con el input ya que el label está arriba */
 }
 
 .login-eye-btn:hover {

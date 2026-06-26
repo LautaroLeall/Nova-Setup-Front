@@ -59,7 +59,8 @@
   max-height: 100%;
   object-fit: contain;
   transition: transform 0.5s ease;
-  mix-blend-mode: screen; /* Mantiene el efecto 3D genial sin fondo */
+  mix-blend-mode: screen;
+  /* Mantiene el efecto 3D genial sin fondo */
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
 }
 
@@ -159,6 +160,7 @@
   line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
