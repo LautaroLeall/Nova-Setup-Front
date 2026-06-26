@@ -12,6 +12,7 @@
   "dependencies": {
     "@mercadopago/sdk-react": "^1.0.7",
     "@react-icons/all-files": "^4.1.0",
+    "@react-oauth/google": "^0.13.5",
     "@tailwindcss/cli": "^4.3.0",
     "@tailwindcss/postcss": "^4.3.0",
     "@tailwindcss/vite": "^4.3.0",
@@ -23,7 +24,8 @@
     "react-hook-form": "^7.75.0",
     "react-icons": "^5.6.0",
     "react-router": "^7.15.1",
-    "sileo": "^0.1.5"
+    "sileo": "^0.1.5",
+    "sweetalert2": "^11.26.25"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
