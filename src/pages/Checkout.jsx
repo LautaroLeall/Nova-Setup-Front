@@ -28,7 +28,12 @@ const Checkout = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      fullName: user ? `${user.firstName || ""} ${user.lastName || ""}`.trim() : "",
+      fullName: user?.shippingAddress?.fullName || (user ? `${user.firstName || ""} ${user.lastName || ""}`.trim() : ""),
+      phone: user?.shippingAddress?.phone || "",
+      address: user?.shippingAddress?.address || "",
+      city: user?.shippingAddress?.city || "",
+      postalCode: user?.shippingAddress?.postalCode || "",
+      province: user?.shippingAddress?.province || "",
     },
   });
 
@@ -65,14 +70,14 @@ const Checkout = () => {
       };
 
       const { data: order } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL || "http://localhost:5000"}/api/orders`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/orders`,
         orderPayload,
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
 
       // 2. Generar la preferencia de Mercado Pago
       const { data: mpData } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL || "http://localhost:5000"}/api/orders/mp-preference`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/orders/mp-preference`,
         { orderId: order._id },
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
