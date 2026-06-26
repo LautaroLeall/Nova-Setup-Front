@@ -97,6 +97,7 @@
   font-weight: 800;
   background: linear-gradient(135deg, white 0%, #aaa 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 0.25rem;
 }
@@ -289,7 +290,8 @@
 }
 
 /* Badges de Tabla */
-.badge-pago, .badge-envio {
+.badge-pago,
+.badge-envio {
   font-size: 0.7rem;
   font-weight: 700;
   padding: 0.25rem 0.6rem;
@@ -297,12 +299,14 @@
   text-transform: uppercase;
 }
 
-.badge-pago.pagado, .badge-envio.enviado {
+.badge-pago.pagado,
+.badge-envio.enviado {
   background: rgba(74, 222, 128, 0.1);
   color: #4ade80;
 }
 
-.badge-pago.pendiente, .badge-envio.pendiente {
+.badge-pago.pendiente,
+.badge-envio.pendiente {
   background: rgba(250, 204, 21, 0.1);
   color: #facc15;
 }
@@ -330,7 +334,10 @@
   gap: 0.5rem;
 }
 
-.btn-action-edit, .btn-action-delete, .btn-action-expand, .btn-action-deliver {
+.btn-action-edit,
+.btn-action-delete,
+.btn-action-expand,
+.btn-action-deliver {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
   color: #888;
@@ -430,7 +437,9 @@
 }
 
 @media (max-width: 600px) {
-  .form-grid-2, .form-grid-3 {
+
+  .form-grid-2,
+  .form-grid-3 {
     grid-template-columns: 1fr;
   }
 }
@@ -851,5 +860,7 @@
 }
 
 @keyframes spin-anim {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }

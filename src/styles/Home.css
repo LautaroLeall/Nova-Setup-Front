@@ -10,7 +10,8 @@
 /* -- Animacion 2.5D (Setup Assembly) -- */
 .home-assembly-section {
   position: relative;
-  height: 600vh; /* Permite un scroll largo para animar */
+  height: 600vh;
+  /* Permite un scroll largo para animar */
   width: 100%;
 }
 
@@ -26,24 +27,28 @@
   background: radial-gradient(circle at center, rgba(16, 16, 24, 0) 0%, var(--color-nova-bg) 100%);
 }
 
-.assembly-intro-text, .assembly-outro-text {
+.assembly-intro-text,
+.assembly-outro-text {
   position: absolute;
   text-align: center;
   z-index: 20;
 }
 
-.assembly-intro-text h2, .assembly-outro-text h2 {
+.assembly-intro-text h2,
+.assembly-outro-text h2 {
   font-size: 3rem;
   font-weight: 900;
   color: white;
   letter-spacing: 0.1em;
 }
 
-.assembly-intro-text span, .assembly-outro-text span {
+.assembly-intro-text span,
+.assembly-outro-text span {
   color: var(--color-nova-cyan);
 }
 
-.assembly-intro-text p, .assembly-outro-text p {
+.assembly-intro-text p,
+.assembly-outro-text p {
   color: #888;
   font-size: 1.2rem;
   margin-top: 1rem;
@@ -76,10 +81,21 @@
   opacity: 0.3;
 }
 
-.neon-blue { background: #3b82f6; }
-.neon-cyan { background: var(--color-nova-cyan); }
-.neon-pink { background: #ec4899; }
-.neon-purple { background: #8b5cf6; }
+.neon-blue {
+  background: #3b82f6;
+}
+
+.neon-cyan {
+  background: var(--color-nova-cyan);
+}
+
+.neon-pink {
+  background: #ec4899;
+}
+
+.neon-purple {
+  background: #8b5cf6;
+}
 
 /* -- Manifesto Section (Historia y Que Hacemos) -- */
 .home-manifesto-section {
@@ -166,7 +182,7 @@
   background: rgba(255, 255, 255, 0.04);
   border-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .pillar-icon-box {
@@ -254,7 +270,7 @@
   font-size: 1.2rem;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
 }
 
 /* -- Decorative Footer -- */
@@ -263,8 +279,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom, #000000, #040409);
-  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  background: linear-gradient(to bottom, var(--color-nova-bg), #000000);
 }
 
 .home-footer-text-container {
@@ -277,6 +292,7 @@
   letter-spacing: 0.15em;
   background: linear-gradient(to bottom, rgba(58, 219, 241, 0.08) 0%, transparent 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

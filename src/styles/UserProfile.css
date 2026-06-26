@@ -91,6 +91,7 @@
   font-weight: 800;
   background: linear-gradient(135deg, white 0%, #aaa 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 0.25rem;
 }
@@ -396,7 +397,9 @@
 }
 
 @keyframes spin-anim {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 
@@ -436,7 +439,10 @@
   cursor: pointer;
   opacity: 0.7;
 }
-.review-modal-close:hover { opacity: 1; }
+
+.review-modal-close:hover {
+  opacity: 1;
+}
 
 .review-modal-form {
   display: flex;
@@ -470,6 +476,7 @@
   font-weight: bold;
   cursor: pointer;
 }
+
 .btn-submit-review:disabled {
   opacity: 0.5;
   cursor: not-allowed;

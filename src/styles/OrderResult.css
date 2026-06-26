@@ -50,9 +50,17 @@
   height: 100px;
 }
 
-.success-icon { color: #4ade80; }
-.failure-icon { color: #ef4444; }
-.pending-icon { color: #fbbf24; }
+.success-icon {
+  color: #4ade80;
+}
+
+.failure-icon {
+  color: #ef4444;
+}
+
+.pending-icon {
+  color: #fbbf24;
+}
 
 .icon-pulse {
   position: absolute;
@@ -75,8 +83,15 @@
 }
 
 @keyframes pulse-ring {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.5); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
 }
 
 /* ── Textos ── */
