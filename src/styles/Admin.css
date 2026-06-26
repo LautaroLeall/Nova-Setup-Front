@@ -1,0 +1,855 @@
+/* ────────────────────────────────────────────────
+   ADMIN PANEL STYLES — Nova SetUp
+   ──────────────────────────────────────────────── */
+
+.admin-page {
+  min-height: 100vh;
+  padding: 6rem 2rem 8rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-container {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .admin-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Sidebar de Admin ── */
+.admin-sidebar {
+  position: sticky;
+  top: 6rem;
+}
+
+.admin-menu-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+}
+
+.admin-menu-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #555;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.admin-menu-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-menu-btn {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #aaa;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.admin-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.02);
+  color: white;
+}
+
+.admin-menu-btn.active {
+  background: rgba(58, 219, 241, 0.1);
+  color: var(--color-nova-cyan);
+  border: 1px solid rgba(58, 219, 241, 0.2);
+}
+
+/* ── Contenido Principal ── */
+.admin-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.admin-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, white 0%, #aaa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.25rem;
+}
+
+.admin-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.btn-admin-primary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--color-nova-cyan), var(--color-nova-blue));
+  border: none;
+  color: #000;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Outfit', sans-serif;
+}
+
+.btn-admin-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(58, 219, 241, 0.3);
+}
+
+.btn-admin-sec {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #aaa;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Outfit', sans-serif;
+}
+
+.btn-admin-sec:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+/* ── Dashboard Stats ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  backdrop-filter: blur(12px);
+}
+
+.stat-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon-wrapper.sales {
+  background: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
+}
+
+.stat-icon-wrapper.orders {
+  background: rgba(56, 189, 248, 0.1);
+  color: #38bdf8;
+}
+
+.stat-icon-wrapper.pending {
+  background: rgba(250, 204, 21, 0.1);
+  color: #facc15;
+}
+
+.stat-icon-wrapper.clients {
+  background: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.02em;
+}
+
+/* ── Section Box ── */
+.admin-section-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+}
+
+.section-box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.section-box-header h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: white;
+}
+
+.view-all-link {
+  font-size: 0.85rem;
+  color: var(--color-nova-cyan);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.view-all-link:hover {
+  opacity: 0.8;
+}
+
+/* ── Tablas ── */
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.admin-table th {
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #555;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-table td {
+  padding: 1rem;
+  font-size: 0.875rem;
+  color: #ccc;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.table-product-thumbnail {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0.25rem;
+  mix-blend-mode: screen;
+}
+
+/* Badges de Tabla */
+.badge-pago, .badge-envio {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 2rem;
+  text-transform: uppercase;
+}
+
+.badge-pago.pagado, .badge-envio.enviado {
+  background: rgba(74, 222, 128, 0.1);
+  color: #4ade80;
+}
+
+.badge-pago.pendiente, .badge-envio.pendiente {
+  background: rgba(250, 204, 21, 0.1);
+  color: #facc15;
+}
+
+.stock-indicator {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.stock-indicator.ok {
+  color: #4ade80;
+}
+
+.stock-indicator.low {
+  color: #facc15;
+}
+
+.stock-indicator.out {
+  color: #f87171;
+}
+
+/* Acciones Cell */
+.actions-cell-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-action-edit, .btn-action-delete, .btn-action-expand, .btn-action-deliver {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #888;
+  width: 28px;
+  height: 28px;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-action-edit:hover {
+  color: var(--color-nova-cyan);
+  border-color: var(--color-nova-cyan);
+  background: rgba(58, 219, 241, 0.05);
+}
+
+.btn-action-delete:hover {
+  color: #f87171;
+  border-color: #f87171;
+  background: rgba(248, 113, 113, 0.05);
+}
+
+.btn-action-expand:hover {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-action-deliver:hover {
+  color: #38bdf8;
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.05);
+}
+
+/* Paginación Admin */
+.admin-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 1.5rem;
+}
+
+.page-btn {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #888;
+  width: 32px;
+  height: 32px;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+
+.page-btn:hover {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.page-btn.active {
+  background: var(--color-nova-cyan);
+  color: #000;
+  border-color: var(--color-nova-cyan);
+}
+
+/* ── Formulario Estilos Admin ── */
+.btn-close-form {
+  background: transparent;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.btn-close-form:hover {
+  color: white;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 600px) {
+  .form-grid-2, .form-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admin-form label {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  color: white;
+  outline: none;
+  font-family: 'Outfit', sans-serif;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.admin-form select option {
+  background: #0d0d1a;
+  color: white;
+}
+
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+  border-color: var(--color-nova-cyan);
+}
+
+/* Divisores de Formulario */
+.form-section-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  margin-top: 1rem;
+  padding-top: 1.25rem;
+}
+
+.form-section-divider h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-nova-cyan);
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+/* Tabs de imagen */
+.image-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.image-tab-btn {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #666;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.35rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'Outfit', sans-serif;
+}
+
+.image-tab-btn.active {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* File Upload */
+.btn-file-upload {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: #888;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.btn-file-upload:hover {
+  border-color: var(--color-nova-cyan);
+  color: white;
+}
+
+/* URL Upload */
+.url-upload-wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-add-url {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Outfit', sans-serif;
+}
+
+.btn-add-url:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Preview de imágenes */
+.form-images-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.preview-image-card {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 0.35rem;
+  overflow: visible;
+}
+
+.preview-image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: screen;
+}
+
+.btn-remove-preview {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #f87171;
+  color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s;
+}
+
+.btn-remove-preview:hover {
+  transform: scale(1.1);
+}
+
+/* Badges Inputs */
+.badge-input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-add-list {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+}
+
+.btn-add-list:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.badges-list-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.badge-tag {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ccc;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.badge-tag button {
+  background: transparent;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.badge-tag button:hover {
+  color: white;
+}
+
+/* Features inputs */
+.feature-inputs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 500px) {
+  .feature-inputs {
+    flex-direction: column;
+  }
+}
+
+.features-list-rows {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.feature-row-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.35rem;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.feature-row-item strong {
+  color: #ccc;
+}
+
+.feature-row-item button {
+  background: transparent;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.feature-row-item button:hover {
+  color: #f87171;
+}
+
+.form-actions-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* ── Buscador Catálogo ── */
+.catalog-search-row {
+  margin-bottom: 1.25rem;
+}
+
+.admin-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.admin-search-wrapper svg {
+  position: absolute;
+  left: 1rem;
+  color: #444;
+}
+
+.admin-search-wrapper input {
+  padding-left: 2.75rem !important;
+}
+
+/* Spinners */
+.spinner-small {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin-anim 0.8s linear infinite;
+}
+
+/* ── Admin Orders Expanded ── */
+.row-order-detail-expanded {
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.order-detail-expanded-admin {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.detail-admin-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .detail-admin-columns {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.detail-admin-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.border-left-admin {
+  border-left: 1px solid rgba(255, 255, 255, 0.03);
+  padding-left: 2rem;
+}
+
+@media (max-width: 768px) {
+  .border-left-admin {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    padding-top: 1.25rem;
+  }
+}
+
+.detail-title-small {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #555;
+  letter-spacing: 0.08em;
+}
+
+.items-list-admin {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.item-row-admin {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.item-thumb-admin {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0.25rem;
+  mix-blend-mode: screen;
+}
+
+.item-details-admin {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+}
+
+.qty-tag-admin {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.item-subtotal-admin {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+}
+
+.detail-text-info-admin p {
+  font-size: 0.85rem;
+  color: #aaa;
+  line-height: 1.6;
+  margin-bottom: 0.35rem;
+}
+
+.detail-text-info-admin strong {
+  color: #ccc;
+}
+
+.divider-admin-light {
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  margin: 0.75rem 0;
+}
+
+@keyframes spin-anim {
+  to { transform: rotate(360deg); }
+}
