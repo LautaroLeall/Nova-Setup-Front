@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
@@ -21,7 +22,7 @@ export const ProductProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       
-      let url = `http://localhost:5000/api/products?pageNumber=${page}`;
+      let url = `${import.meta.env.VITE_BACKEND_URL}/api/products?pageNumber=${page}`;
       if (searchKeyword) url += `&keyword=${searchKeyword}`;
       if (activeCategory) url += `&category=${activeCategory}`;
 
@@ -39,6 +40,7 @@ export const ProductProvider = ({ children }) => {
   }, [page, searchKeyword, activeCategory]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchProducts();
   }, [fetchProducts]);
 
