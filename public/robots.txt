@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /checkout
+Disallow: /perfil
+Disallow: /payment/
+
+Sitemap: https://nova-setup.vercel.app/sitemap.xml
