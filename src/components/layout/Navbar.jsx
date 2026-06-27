@@ -116,6 +116,7 @@ export const Navbar = () => {
                         <button
                             className="navbar-action-btn"
                             onClick={() => setIsSearchOpen(!isSearchOpen)}
+                            aria-label={isSearchOpen ? "Cerrar búsqueda" : "Abrir búsqueda"}
                         >
                             {isSearchOpen ? <X size={19} /> : <Search size={19} />}
                         </button>
@@ -144,21 +145,23 @@ export const Navbar = () => {
                             </div>
                         </div>
                     ) : (
-                        <Link to="/login" className="navbar-login-link">
+                        <Link to="/login" className="navbar-login-link" aria-label="Iniciar sesión">
                             <User size={19} />
                         </Link>
                     )}
 
-                    <button className="navbar-cart-btn" onClick={toggleCart}>
+                    <button className="navbar-cart-btn" onClick={toggleCart} aria-label={`Abrir carrito${totalItems > 0 ? `, ${totalItems} productos` : ''}`}>
                         <ShoppingCart size={19} />
                         {totalItems > 0 && (
-                            <span className="navbar-cart-badge">{totalItems}</span>
+                            <span className="navbar-cart-badge" aria-hidden="true">{totalItems}</span>
                         )}
                     </button>
 
                     <button
                         className="navbar-mobile-toggle"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+                        aria-expanded={isMobileMenuOpen}
                     >
                         {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
                     </button>

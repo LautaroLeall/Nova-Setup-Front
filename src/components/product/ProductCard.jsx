@@ -98,6 +98,7 @@ export const ProductCard = ({ product }) => {
               className={`clean-add-btn ${countInStock === 0 ? "disabled" : ""}`}
               onClick={handleAddToCart}
               disabled={countInStock === 0}
+              aria-label={countInStock === 0 ? `${name} - Sin stock` : `Agregar ${name} al carrito`}
             >
               <ShoppingCart size={18} />
             </button>
