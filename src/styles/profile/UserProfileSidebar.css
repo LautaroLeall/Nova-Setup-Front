@@ -1,0 +1,58 @@
+/* ── Sidebar: Info de Usuario ── */
+.profile-sidebar {
+  position: sticky;
+  top: 6rem;
+}
+
+.profile-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1.25rem;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  backdrop-filter: blur(12px);
+}
+
+.profile-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-nova-cyan), var(--color-nova-purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 0 20px rgba(58, 219, 241, 0.25);
+  color: #000;
+}
+
+.profile-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.02em;
+}
+
+.profile-email {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 1.25rem;
+  word-break: break-all;
+}
+
+.profile-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-nova-cyan);
+  background: rgba(58, 219, 241, 0.1);
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid rgba(58, 219, 241, 0.2);
+}
+

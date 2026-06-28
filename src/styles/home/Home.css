@@ -1,10 +1,7 @@
-/* ----------------------------------------------------------------------------
-   HOME PAGE STYLES - Nova SetUp (REDESIGNED)
-   ---------------------------------------------------------------------------- */
+/* HOME PAGE STYLES - Nova SetUp */
 
 .home-page-container {
   background-color: var(--color-nova-bg);
-  /* overflow-x: hidden; REMOVED BECAUSE IT BREAKS POSITION: STICKY FOR HERO AND ASSEMBLY */
 }
 
 /* -- Animacion 2.5D (Setup Assembly) -- */

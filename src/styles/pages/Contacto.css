@@ -1,0 +1,334 @@
+/* Contacto.css */
+
+.contacto-page {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--color-bg-dark);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.contacto-bg-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.contacto-bg-shape-1 {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 24rem;
+  height: 24rem;
+  background-color: var(--color-nova-cyan);
+  border-radius: 9999px;
+  filter: blur(150px);
+}
+
+.contacto-bg-shape-2 {
+  position: absolute;
+  bottom: 20%;
+  right: -10%;
+  width: 31.25rem;
+  height: 31.25rem;
+  background-color: #6d28d9;
+  border-radius: 9999px;
+  filter: blur(200px);
+}
+
+.contacto-main-container {
+  position: relative;
+  z-index: 10;
+  padding-top: 7rem;
+  padding-bottom: 3rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.contacto-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.contacto-title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: white;
+  letter-spacing: -0.05em;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .contacto-title {
+    font-size: 4.5rem;
+  }
+}
+
+.contacto-subtitle {
+  color: #9ca3af;
+  font-size: 1rem;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .contacto-subtitle {
+    font-size: 1.125rem;
+  }
+}
+
+.contacto-content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 2.5rem;
+}
+
+.contacto-content-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  max-width: 64rem;
+}
+
+@media (min-width: 768px) {
+  .contacto-content-inner {
+    flex-direction: row;
+  }
+}
+
+.contacto-form-card {
+  flex: 1;
+  width: 100%;
+  background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.05), transparent);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.contacto-form-header {
+  margin-bottom: 2rem;
+}
+
+.contacto-form-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.contacto-form-desc {
+  color: #9ca3af;
+}
+
+.contacto-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contacto-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contacto-form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #d1d5db;
+}
+
+.contacto-form-input {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: white;
+  transition: border-color 0.2s;
+}
+
+.contacto-form-input:focus {
+  outline: none;
+  border-color: var(--color-nova-cyan);
+}
+
+.contacto-form-textarea {
+  resize: none;
+}
+
+.contacto-submit-btn {
+  margin-top: 0.5rem;
+  background-color: var(--color-nova-cyan);
+  color: black;
+  font-weight: 700;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s, opacity 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.contacto-submit-btn:hover:not(:disabled) {
+  background-color: white;
+}
+
+.contacto-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.contacto-submit-text-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .5;
+  }
+}
+
+.contacto-social-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .contacto-social-wrapper {
+    width: 20rem;
+  }
+}
+
+.contacto-social-item {
+  flex: 1;
+}
+
+.contacto-social-card {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.contacto-social-card-name {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.contacto-social-card-name-email {
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+/* Modificadores por red social */
+.social-card-github {
+  color: #d1d5db;
+}
+
+.social-card-github:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.social-icon-github {
+  transition: transform 0.2s;
+}
+
+.contacto-social-card:hover .social-icon-github {
+  transform: scale(1.1);
+}
+
+.social-card-linkedin {
+  color: #d1d5db;
+}
+
+.social-card-linkedin:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: white;
+}
+
+.social-icon-linkedin {
+  color: #60a5fa;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.contacto-social-card:hover .social-icon-linkedin {
+  transform: scale(1.1);
+  color: #3b82f6;
+}
+
+.social-card-whatsapp {
+  color: #d1d5db;
+}
+
+.social-card-whatsapp:hover {
+  background-color: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.5);
+  color: white;
+}
+
+.social-icon-whatsapp {
+  color: #4ade80;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.contacto-social-card:hover .social-icon-whatsapp {
+  transform: scale(1.1);
+  color: #22c55e;
+}
+
+.social-card-email {
+  background-color: rgba(58, 219, 241, 0.1);
+  border-color: rgba(58, 219, 241, 0.3);
+  color: white;
+  cursor: default;
+}
+
+.social-icon-email {
+  color: var(--color-nova-cyan);
+}
