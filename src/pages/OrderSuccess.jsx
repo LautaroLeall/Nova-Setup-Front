@@ -3,7 +3,7 @@ import { useSearchParams, Link, Navigate } from "react-router";
 import { motion } from "framer-motion";
 import { CheckCircle2, ShoppingBag, Package } from "lucide-react";
 import { CartContext } from "../context/CartContext";
-import "../styles/OrderResult.css";
+import "../styles/pages/OrderResult.css";
 
 const OrderSuccess = () => {
   const { clearCart } = useContext(CartContext);

@@ -1,3 +1,5 @@
+import "../../styles/admin/AdminOrderDetails.css";
+
 const OrderDetailsExpanded = ({ order, handleStatusChange }) => {
   return (
     <tr className="row-order-detail-expanded">
@@ -32,42 +34,38 @@ const OrderDetailsExpanded = ({ order, handleStatusChange }) => {
                 <p><strong>C.P.:</strong> {order.shippingAddress.postalCode}</p>
                 <p><strong>Teléfono:</strong> {order.shippingAddress.phone || "N/A"}</p>
 
-                <hr style={{ borderColor: 'rgba(255,255,255,0.1)', margin: '1rem 0' }} />
+                <hr className="detail-divider-admin" />
 
-                <h4 className="detail-title-small" style={{ marginTop: '1rem' }}>Gestión de Estados</h4>
-                <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-                  <div style={{ flex: 1 }}>
-                    <label style={{ display: 'block', fontSize: '0.8rem', color: '#888', marginBottom: '0.2rem' }}>Estado de Pago</label>
+                <h4 className="detail-title-small detail-title-mt">Gestión de Estados</h4>
+                <div className="detail-status-row">
+                  <div className="detail-status-col">
+                    <label className="detail-status-label">Estado de Pago</label>
                     {order.isPaid ? (
-                      <div style={{ display: 'flex', alignItems: 'center', height: '38px' }}>
-                        <span className="badge-pago pagado" style={{ display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', padding: '0.5rem', textAlign: 'center' }}>
-                          Pagado
-                        </span>
+                      <div className="detail-status-display">
+                        <span className="badge-pago pagado detail-badge-full">Pagado</span>
                       </div>
                     ) : (
                       <select
                         value={order.isPaid.toString()}
                         onChange={(e) => handleStatusChange(order._id, { isPaid: e.target.value === 'true' })}
-                        style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', background: '#222', color: 'white', border: '1px solid #444' }}
+                        className="detail-status-select"
                       >
                         <option value="false">Pendiente</option>
                         <option value="true">Pagado</option>
                       </select>
                     )}
                   </div>
-                  <div style={{ flex: 1 }}>
-                    <label style={{ display: 'block', fontSize: '0.8rem', color: '#888', marginBottom: '0.2rem' }}>Estado de Envío</label>
+                  <div className="detail-status-col">
+                    <label className="detail-status-label">Estado de Envío</label>
                     {order.isDelivered || order.isUserConfirmed ? (
-                      <div style={{ display: 'flex', alignItems: 'center', height: '38px' }}>
-                        <span className="badge-envio enviado" style={{ display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', padding: '0.5rem', textAlign: 'center' }}>
-                          Enviado / Entregado
-                        </span>
+                      <div className="detail-status-display">
+                        <span className="badge-envio enviado detail-badge-full">Enviado / Entregado</span>
                       </div>
                     ) : (
                       <select
                         value={order.isDelivered.toString()}
                         onChange={(e) => handleStatusChange(order._id, { isDelivered: e.target.value === 'true' })}
-                        style={{ width: '100%', padding: '0.5rem', borderRadius: '4px', background: '#222', color: 'white', border: '1px solid #444' }}
+                        className="detail-status-select"
                       >
                         <option value="false">Pendiente</option>
                         <option value="true">Enviado / Entregado</option>
@@ -76,11 +74,11 @@ const OrderDetailsExpanded = ({ order, handleStatusChange }) => {
                   </div>
                 </div>
                 {order.isUserConfirmed && (
-                  <div style={{ marginTop: '1rem', padding: '0.5rem', background: 'rgba(16, 185, 129, 0.1)', border: '1px solid #10b981', color: '#10b981', borderRadius: '4px', textAlign: 'center', fontSize: '0.85rem' }}>
+                  <div className="detail-user-confirmed-box">
                     El usuario ha confirmado la recepción del producto.
                   </div>
                 )}
-                <div className="payment-data-box-admin" style={{ marginTop: '1rem' }}>
+                <div className="payment-data-box-admin">
                   <h5>Datos Mercado Pago</h5>
                   <p><strong>ID Transacción:</strong> {order.paymentResult?.mp_payment_id || "N/A"}</p>
                   <p><strong>Estado MP:</strong> {order.paymentResult?.mp_status || "N/A"}</p>

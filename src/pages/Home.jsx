@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import HomeScrollAssembly from "../components/home/HomeScrollAssembly";
 import HomeManifesto from "../components/home/HomeManifesto";
 import Footer from "../components/layout/Footer";
-import "../styles/Home.css";
+import "../styles/home/Home.css";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <main className="home-page-container">
-      {/* ── Hero Carousel (Sin Tocar) ── */}
+      {/* ── Hero Carousel [MAC] ── */}
       <HeroEcommerce />
 
       {/* ── Animación 2.5D de Ensamblaje ── */}

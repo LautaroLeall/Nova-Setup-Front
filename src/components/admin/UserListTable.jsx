@@ -1,4 +1,5 @@
-import { Trash2, UserCheck, UserX } from "lucide-react";
+import { Edit3, Trash2, UserCheck, UserX } from "lucide-react";
+import "../../styles/admin/AdminTables.css";
 import api from "../../services/api";
 import { showConfirmDialog, showSuccessAlert, showErrorAlert } from "../../utils/swalConfig";
 
@@ -57,8 +58,8 @@ const UserListTable = ({ users, fetchUsers, user }) => {
         <tbody>
           {users.map((u) => (
             <tr key={u._id}>
-              <td className="font-bold">{u.firstName} {u.lastName}</td>
-              <td><a href={`mailto:${u.email}`} className="text-blue-400 hover:underline">{u.email}</a></td>
+              <td className="admin-table-font-bold">{u.firstName} {u.lastName}</td>
+              <td><a href={`mailto:${u.email}`} className="admin-table-link">{u.email}</a></td>
               <td>
                 <span className={`badge-pago ${u.isAdmin ? "pagado" : "pendiente"}`}>
                   {u.isAdmin ? "Admin" : "Cliente"}

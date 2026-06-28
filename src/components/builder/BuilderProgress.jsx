@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { PCBuilderContext } from "../../context/PCBuilderContext";
 import { motion } from "framer-motion";
+import "../../styles/builder/BuilderProgress.css";
 import { Check } from "lucide-react";
 
 export const BuilderProgress = () => {

@@ -17,16 +17,76 @@ export const PCBuilderContext = createContext();
 
 export const PCBuilderProvider = ({ children }) => {
   const steps = useMemo(() => [
-    { id: "procesador", label: "Procesador", categoryFilter: "Procesadores", icon: Cpu, isRequired: true },
-    { id: "mother", label: "Motherboard", categoryFilter: "Mothers", icon: CircuitBoard, isRequired: true },
-    { id: "cooler", label: "Cooler", categoryFilter: "Coolers", icon: Fan, isRequired: false },
-    { id: "ram", label: "Memoria RAM", categoryFilter: "Memorias RAM", icon: MemoryStick, isRequired: true },
-    { id: "gpu", label: "Placa de Video", categoryFilter: "Placas de Video", icon: MonitorPlay, isRequired: false },
-    { id: "storage", label: "Almacenamiento", categoryFilter: "Almacenamiento", icon: HardDrive, isRequired: true },
-    { id: "psu", label: "Fuente", categoryFilter: "Fuentes", icon: Zap, isRequired: true },
-    { id: "case", label: "Gabinete", categoryFilter: "Gabinetes", icon: Box, isRequired: true },
-    { id: "monitor", label: "Monitor", categoryFilter: "Monitores", icon: Monitor, isRequired: false },
-    { id: "peripherals", label: "Periféricos", categoryFilter: "Periféricos", icon: Keyboard, isRequired: false },
+    {
+      id: "procesador",
+      label: "Procesador",
+      categoryFilter: "Procesadores",
+      icon: Cpu,
+      isRequired: true
+    },
+    {
+      id: "mother",
+      label: "Motherboard",
+      categoryFilter: "Mothers",
+      icon: CircuitBoard,
+      isRequired: true
+    },
+    {
+      id: "cooler",
+      label: "Cooler",
+      categoryFilter: "Coolers",
+      icon: Fan,
+      isRequired: false
+    },
+    {
+      id: "ram",
+      label: "Memoria RAM",
+      categoryFilter: "Memorias RAM",
+      icon: MemoryStick,
+      isRequired: true
+    },
+    {
+      id: "gpu",
+      label: "Placa de Video",
+      categoryFilter: "Placas de Video",
+      icon: MonitorPlay,
+      isRequired: false
+    },
+    {
+      id: "storage",
+      label: "Almacenamiento",
+      categoryFilter: "Almacenamiento",
+      icon: HardDrive,
+      isRequired: true
+    },
+    {
+      id: "psu",
+      label: "Fuente",
+      categoryFilter: "Fuentes",
+      icon: Zap,
+      isRequired: true
+    },
+    {
+      id: "case",
+      label: "Gabinete",
+      categoryFilter: "Gabinetes",
+      icon: Box,
+      isRequired: true
+    },
+    {
+      id: "monitor",
+      label: "Monitor",
+      categoryFilter: "Monitores",
+      icon: Monitor,
+      isRequired: false
+    },
+    {
+      id: "peripherals",
+      label: "Periféricos",
+      categoryFilter: "Periféricos",
+      icon: Keyboard,
+      isRequired: false
+    },
   ], []);
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);

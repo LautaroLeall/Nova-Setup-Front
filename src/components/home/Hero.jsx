@@ -1,10 +1,11 @@
-// src/components/Hero.jsx
+// src/components/home/Hero.jsx
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useContext } from "react";
 import { ProductContext } from "../../context/ProductContext";
 import { CartContext } from "../../context/CartContext";
 import { sileo } from "sileo";
 import { useNavigate } from "react-router";
+import "../../styles/home/Hero.css";
 
 // Tarjeta individual premium (restaurada al estilo MacBook anterior)
 const ProductCard = ({ product }) => {
@@ -33,38 +34,38 @@ const ProductCard = ({ product }) => {
 
     return (
         <div
-            className="relative h-full flex-1 overflow-hidden group cursor-pointer border-r border-white/5 last:border-r-0"
+            className="product-hero-card group"
             onClick={() => navigate(`/product/${product._id || product.id}`)}
         >
             {/* Foto de fondo */}
             <img
                 src={imgUrl}
                 alt={product.name}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="product-hero-img"
                 draggable={false}
             />
             {/* Capa oscura base */}
-            <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors duration-500" />
+            <div className="product-hero-overlay" />
             {/* Gradiente inferior */}
-            <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent" />
+            <div className="product-hero-gradient" />
 
             {/* Badge */}
-            <div className="absolute top-3 left-3">
-                <span className="text-[9px] font-black tracking-widest text-white px-2 py-0.5 rounded-full nova-gradient">
+            <div className="product-hero-badge-container">
+                <span className="product-hero-badge nova-gradient">
                     {badgeText}
                 </span>
             </div>
 
             {/* Info inferior */}
-            <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                <p className="font-mono text-[10px] tracking-widest mb-0.5 uppercase" style={{ color: "#3adbf1" }}>
+            <div className="product-hero-info">
+                <p className="product-hero-brand">
                     {product.brand || "Nova SetUp"}
                 </p>
-                <h3 className="text-white font-bold text-sm leading-tight mb-2">{product.name}</h3>
-                <div className="flex items-center justify-between">
-                    <span className="font-black text-base" style={{ color: "#3adbf1" }}>{priceDisplay}</span>
+                <h3 className="product-hero-name">{product.name}</h3>
+                <div className="product-hero-footer">
+                    <span className="product-hero-price">{priceDisplay}</span>
                     <button
-                        className={`text-white w-7 h-7 rounded-full flex items-center justify-center text-base font-bold transition-all duration-300 active:scale-90 nova-gradient nova-glow ${product.countInStock === 0 ? "opacity-30 cursor-not-allowed" : "opacity-0 group-hover:opacity-100"
+                        className={`product-hero-add-btn nova-gradient nova-glow ${product.countInStock === 0 ? "opacity-30 cursor-not-allowed" : "product-hero-add-btn-hidden"
                             }`}
                         onClick={handleAddToCart}
                         disabled={product.countInStock === 0}
@@ -78,21 +79,21 @@ const ProductCard = ({ product }) => {
 };
 
 const MacScreen = ({ children }) => (
-    <div className="w-full" style={{ aspectRatio: "16/9" }}>
-        <div className="w-full h-full rounded-[1.75rem] border-4 border-[#2a2a2a] bg-[#1c1c1e] shadow-[0_30px_80px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col relative">
+    <div className="mac-wrapper">
+        <div className="mac-frame">
             {/* Notch */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-[#1c1c1e] rounded-b-xl z-20 flex items-end justify-center pb-1">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#111] border border-white/10 flex items-center justify-center">
-                    <div className="w-0.75 h-0.75 bg-blue-400/50 rounded-full" />
+            <div className="mac-notch">
+                <div className="mac-camera-outer">
+                    <div className="mac-camera-inner" />
                 </div>
             </div>
             {/* Pantalla */}
-            <div className="grow mx-2 mt-2 mb-5 bg-[#050505] rounded-t-3xl rounded-b-sm overflow-hidden border border-white/6">
+            <div className="mac-screen-content">
                 {children}
             </div>
             {/* Barbilla */}
-            <div className="absolute bottom-1 left-0 right-0 h-4 flex justify-center items-center">
-                <span className="text-[7px] tracking-[0.25em] text-white/20 uppercase font-semibold">MacBook Pro</span>
+            <div className="mac-chin">
+                <span className="mac-chin-text">MacBook Pro</span>
             </div>
         </div>
     </div>
@@ -131,30 +132,27 @@ export function HeroEcommerce() {
     const group2 = items.slice(6, 12);
 
     return (
-        <div ref={containerRef} className="relative w-full bg-transparent" style={{ height: "500vh" }}>
+        <div ref={containerRef} className="hero-wrapper">
             {/* ── Zona sticky: exactamente 100vh ── */}
-            <div
-                className="sticky top-0 w-full h-screen flex items-center justify-center overflow-hidden"
-                style={{ perspective: "1400px" }}
-            >
+            <div className="hero-sticky-zone">
                 {/* ── TÍTULO ── */}
                 <motion.div
                     style={{ scale: titleScale, opacity: titleOpacity, y: titleY }}
-                    className="absolute z-10 w-full flex flex-col items-center justify-center pointer-events-none px-4"
+                    className="hero-title-container"
                 >
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.15 }}
-                        className="text-center"
+                        className="hero-title-text-center"
                     >
-                        <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white tracking-tighter leading-none">
+                        <h1 className="hero-title">
                             DISEÑADO PARA LA{" "}
                             <span className="nova-gradient-text animate-gradient">
                                 PERFECCIÓN
                             </span>
                         </h1>
-                        <p className="mt-4 text-sm md:text-base lg:text-lg max-w-lg mx-auto font-light" style={{ color: "#a682e7", opacity: 0.8 }}>
+                        <p className="hero-subtitle">
                             Teclados mecánicos, iluminación inteligente y setups premium.
                         </p>
                     </motion.div>
@@ -162,7 +160,7 @@ export function HeroEcommerce() {
 
                 {/* ── MAC ── */}
                 <motion.div
-                    className="absolute z-0 w-full max-w-250 flex items-center justify-center px-4"
+                    className="hero-mac-container"
                     style={{
                         y: macY,
                         rotateX,
@@ -174,30 +172,30 @@ export function HeroEcommerce() {
                 >
                     <MacScreen>
                         {/* Contenido dentro de la pantalla Mac */}
-                        <div className="relative w-full h-full overflow-hidden" style={{ background: "#06060f" }}>
+                        <div className="mac-screen-inner-content">
                             {/* Dots indicadores de página */}
-                            <div className="absolute top-3 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-                                <div className="w-2 h-2 rounded-full" style={{ background: "rgba(255,255,255,0.8)" }} />
-                                <div className="w-2 h-2 rounded-full" style={{ background: "rgba(255,255,255,0.3)" }} />
+                            <div className="mac-carousel-dots">
+                                <div className="mac-carousel-dot active" />
+                                <div className="mac-carousel-dot inactive" />
                             </div>
 
                             {/* Carrusel Deslizable */}
                             <motion.div
                                 style={{ width: "200%", x: carouselX }}
-                                className="flex h-full"
+                                className="mac-carousel-wrapper"
                             >
                                 {/* Pantalla 1 */}
-                                <div className="w-1/2 h-full grid grid-cols-3 grid-rows-2">
+                                <div className="mac-carousel-page">
                                     {group1.map((p, idx) => (
-                                        <div key={p._id || idx} className="relative h-full w-full border-b border-r border-white/5 last:border-b-0">
+                                        <div key={p._id || idx} className="mac-product-wrapper">
                                             <ProductCard product={p} />
                                         </div>
                                     ))}
                                 </div>
                                 {/* Pantalla 2 */}
-                                <div className="w-1/2 h-full grid grid-cols-3 grid-rows-2">
+                                <div className="mac-carousel-page">
                                     {group2.map((p, idx) => (
-                                        <div key={p._id || idx} className="relative h-full w-full border-b border-r border-white/5 last:border-b-0">
+                                        <div key={p._id || idx} className="mac-product-wrapper">
                                             <ProductCard product={p} />
                                         </div>
                                     ))}

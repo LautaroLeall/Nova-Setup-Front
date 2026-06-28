@@ -2,7 +2,8 @@ import { useContext, useState } from "react";
 import { PCBuilderContext } from "../../context/PCBuilderContext";
 import { CartContext } from "../../context/CartContext";
 import { useNavigate } from "react-router";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import "../../styles/builder/BuilderSummaryBox.css";
 import { X, ShoppingCart } from "lucide-react";
 import confetti from "canvas-confetti"; // Usaremos esto para la celebración si se puede, o algo simple
 

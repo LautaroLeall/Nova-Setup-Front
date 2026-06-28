@@ -1,4 +1,5 @@
-import { Users, ShoppingBag, Clock, DollarSign } from "lucide-react";
+import { DollarSign, Package, Clock, Users, ShoppingBag } from "lucide-react";
+import "../../styles/admin/AdminStats.css";
 import { motion } from "framer-motion";
 
 const DashboardStats = ({ usersCount, totalOrdersCount, pendingShipmentCount, totalSales, productsCount, totalStock }) => {
@@ -70,7 +71,7 @@ const DashboardStats = ({ usersCount, totalOrdersCount, pendingShipmentCount, to
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0.2 }}
       >
-        <div className="stat-icon-wrapper" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>
+        <div className="stat-icon-wrapper products">
           <ShoppingBag size={22} />
         </div>
         <div className="stat-info">
@@ -85,7 +86,7 @@ const DashboardStats = ({ usersCount, totalOrdersCount, pendingShipmentCount, to
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0.25 }}
       >
-        <div className="stat-icon-wrapper" style={{ background: 'rgba(234, 179, 8, 0.1)', color: '#eab308' }}>
+        <div className="stat-icon-wrapper stock">
           <ShoppingBag size={22} />
         </div>
         <div className="stat-info">

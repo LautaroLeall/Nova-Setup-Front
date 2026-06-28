@@ -8,7 +8,7 @@ import { ShoppingBag, ChevronRight, CheckCircle2 } from "lucide-react";
 import api from "../services/api";
 import CheckoutForm from "../components/checkout/CheckoutForm";
 import CheckoutSummary from "../components/checkout/CheckoutSummary";
-import "../styles/Checkout.css";
+import "../styles/checkout/CheckoutLayout.css";
 
 // Inicializar MP una sola vez con la Public Key
 initMercadoPago(import.meta.env.VITE_MP_PUBLIC_KEY, { locale: "es-AR" });

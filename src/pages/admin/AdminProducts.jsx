@@ -8,7 +8,7 @@ import { showConfirmDialog, showSuccessAlert, showErrorAlert } from "../../utils
 import AdminSidebar from "../../components/admin/AdminSidebar";
 import ProductFormModal from "../../components/admin/ProductFormModal";
 import ProductListTable from "../../components/admin/ProductListTable";
-import "../../styles/Admin.css";
+import "../../styles/admin/AdminLayout.css";
 
 const AdminProducts = () => {
   const { user } = useContext(AuthContext);

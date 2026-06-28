@@ -1,4 +1,5 @@
 import { Lock } from "lucide-react";
+import "../../styles/checkout/CheckoutSummary.css";
 
 const CheckoutSummary = ({ cartItems, subtotal, total }) => {
   return (

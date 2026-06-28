@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { Filter, ChevronDown, ChevronUp } from "lucide-react";
+import { Filter, X, ChevronDown, ChevronUp } from "lucide-react";
+import "../../styles/builder/BuilderFilters.css";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const BuilderFilters = ({

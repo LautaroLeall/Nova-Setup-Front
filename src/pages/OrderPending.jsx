@@ -1,7 +1,7 @@
 import { useSearchParams, Link, Navigate } from "react-router";
 import { motion } from "framer-motion";
 import { Clock, ShoppingBag, Mail } from "lucide-react";
-import "../styles/OrderResult.css";
+import "../styles/pages/OrderResult.css";
 
 const OrderPending = () => {
   const [searchParams] = useSearchParams();

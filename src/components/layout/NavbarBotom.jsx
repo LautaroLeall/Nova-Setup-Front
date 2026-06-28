@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import { CartContext } from "../../context/CartContext";
-import "../../styles/NavbarBotom.css";
+import "../../styles/layout/NavbarBotom.css";
 
 export function BottomNavBar({
     className = "",
@@ -98,7 +98,7 @@ export function BottomNavBar({
                                 aria-label={item.label}
                                 type="button"
                             >
-                                <div className="bottom-nav-icon-wrapper" style={{ position: "relative" }}>
+                                <div className="bottom-nav-icon-wrapper">
                                     <Icon
                                         size={20}
                                         strokeWidth={isActive ? 2.5 : 2}

@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { User, Phone, MapPin, AlertCircle, Lock } from "lucide-react";
+import "../../styles/checkout/CheckoutForm.css";
 
 const CheckoutForm = ({ user, onSubmit, isLoading, apiError }) => {
   const {
