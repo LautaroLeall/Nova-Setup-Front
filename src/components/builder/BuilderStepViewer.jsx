@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext, useMemo } from "react";
 import { PCBuilderContext } from "../../context/PCBuilderContext";
 import { motion, AnimatePresence } from "framer-motion";
+import "../../styles/builder/BuilderStepViewer.css";
 import api from "../../services/api";
 import { CheckCircle2, ChevronRight, ChevronLeft, SkipForward } from "lucide-react";
 import { BuilderFilters } from "./BuilderFilters";

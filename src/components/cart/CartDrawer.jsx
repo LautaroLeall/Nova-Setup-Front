@@ -4,7 +4,7 @@ import { X, Trash2, ShoppingBag } from "lucide-react";
 import { CartContext } from "../../context/CartContext";
 import { Link, useNavigate } from "react-router";
 import { showConfirmDialog } from "../../utils/swalConfig";
-import "../../styles/CartDrawer.css";
+import "../../styles/cart/CartDrawer.css";
 
 export const CartDrawer = () => {
   const navigate = useNavigate();

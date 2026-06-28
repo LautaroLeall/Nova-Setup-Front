@@ -1,15 +1,74 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 import { Cpu, Monitor, Mouse, Keyboard, HardDrive, Headphones, Home } from "lucide-react";
-import "../styles/NotFound.css";
+import "../styles/pages/NotFound.css";
 
 const floatingElements = [
-  { Icon: Cpu, size: 64, color: "var(--color-nova-cyan)", initialPosition: { x: "-30vw", y: "-20vh" }, delay: 0 },
-  { Icon: Monitor, size: 80, color: "var(--color-nova-magenta)", initialPosition: { x: "25vw", y: "-35vh" }, delay: 1 },
-  { Icon: Mouse, size: 48, color: "var(--color-nova-purple)", initialPosition: { x: "35vw", y: "15vh" }, delay: 2 },
-  { Icon: Keyboard, size: 72, color: "var(--color-nova-cyan)", initialPosition: { x: "-25vw", y: "30vh" }, delay: 0.5 },
-  { Icon: HardDrive, size: 56, color: "var(--color-nova-magenta)", initialPosition: { x: "-10vw", y: "-40vh" }, delay: 1.5 },
-  { Icon: Headphones, size: 64, color: "var(--color-nova-purple)", initialPosition: { x: "15vw", y: "35vh" }, delay: 2.5 },
+  {
+    Icon: Cpu,
+    size: 64,
+    color: "var(--color-nova-cyan)",
+    initialPosition:
+    {
+      x: "-30vw",
+      y: "-20vh"
+    },
+    delay: 0
+  },
+  {
+    Icon: Monitor,
+    size: 80,
+    color: "var(--color-nova-magenta)",
+    initialPosition:
+    {
+      x: "25vw", y: "-35vh"
+    },
+    delay: 1
+  },
+  {
+    Icon: Mouse,
+    size: 48,
+    color: "var(--color-nova-purple)",
+    initialPosition:
+    {
+      x: "35vw",
+      y: "15vh"
+    },
+    delay: 2
+  },
+  {
+    Icon: Keyboard,
+    size: 72,
+    color: "var(--color-nova-cyan)",
+    initialPosition:
+    {
+      x: "-25vw",
+      y: "30vh"
+    },
+    delay: 0.5
+  },
+  {
+    Icon: HardDrive,
+    size: 56,
+    color: "var(--color-nova-magenta)",
+    initialPosition:
+    {
+      x: "-10vw",
+      y: "-40vh"
+    },
+    delay: 1.5
+  },
+  {
+    Icon: Headphones,
+    size: 64,
+    color: "var(--color-nova-purple)",
+    initialPosition:
+    {
+      x: "15vw",
+      y: "35vh"
+    },
+    delay: 2.5
+  },
 ];
 
 const NotFound = () => {

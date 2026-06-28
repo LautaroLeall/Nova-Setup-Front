@@ -5,7 +5,10 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import { ProductContext } from "../../context/ProductContext";
 import { CartContext } from "../../context/CartContext";
-import "../../styles/Navbar.css";
+import "../../styles/layout/NavbarLayout.css";
+import "../../styles/layout/NavbarDesktop.css";
+import "../../styles/layout/NavbarSearch.css";
+import "../../styles/layout/NavbarMobile.css";
 
 export const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);

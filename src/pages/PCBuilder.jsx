@@ -1,7 +1,7 @@
 import { BuilderProgress } from "../components/builder/BuilderProgress";
 import { BuilderStepViewer } from "../components/builder/BuilderStepViewer";
 import { BuilderSummaryBox } from "../components/builder/BuilderSummaryBox";
-import "../styles/PCBuilder.css";
+import "../styles/builder/PCBuilderLayout.css";
 
 export const PCBuilder = () => {
   return (

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { X, Upload, Trash2 } from "lucide-react";
+import "../../styles/admin/AdminForms.css";
 import { motion } from "framer-motion";
 import api from "../../services/api";
 import { showSuccessAlert, showErrorAlert } from "../../utils/swalConfig";
@@ -159,9 +160,9 @@ const ProductFormModal = ({ productToEdit, onClose, fetchProducts }) => {
 
       <form onSubmit={handleSubmitProduct} className="admin-form">
         <div className="form-group">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-            <label style={{ marginBottom: 0 }}>Nombre del Producto *</label>
-            <span style={{ fontSize: '0.75rem', color: formName.length >= 50 ? 'var(--color-nova-error, #f87171)' : '#888' }}>{formName.length}/50</span>
+          <div className="form-field-header">
+            <label>Nombre del Producto *</label>
+            <span className={`form-char-count ${formName.length >= 50 ? 'limit-reached' : ''}`}>{formName.length}/50</span>
           </div>
           <input
             type="text"
@@ -175,9 +176,9 @@ const ProductFormModal = ({ productToEdit, onClose, fetchProducts }) => {
 
         <div className="form-grid-2">
           <div className="form-group">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-              <label style={{ marginBottom: 0 }}>Marca *</label>
-              <span style={{ fontSize: '0.75rem', color: formBrand.length >= 25 ? 'var(--color-nova-error, #f87171)' : '#888' }}>{formBrand.length}/25</span>
+            <div className="form-field-header">
+              <label>Marca *</label>
+              <span className={`form-char-count ${formBrand.length >= 25 ? 'limit-reached' : ''}`}>{formBrand.length}/25</span>
             </div>
             <input
               type="text"
@@ -243,9 +244,9 @@ const ProductFormModal = ({ productToEdit, onClose, fetchProducts }) => {
         </div>
 
         <div className="form-group">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-            <label style={{ marginBottom: 0 }}>Descripción *</label>
-            <span style={{ fontSize: '0.75rem', color: formDescription.length >= 250 ? 'var(--color-nova-error, #f87171)' : '#888' }}>{formDescription.length}/250</span>
+          <div className="form-field-header">
+            <label>Descripción *</label>
+            <span className={`form-char-count ${formDescription.length >= 250 ? 'limit-reached' : ''}`}>{formDescription.length}/250</span>
           </div>
           <textarea
             rows="3"
@@ -257,11 +258,11 @@ const ProductFormModal = ({ productToEdit, onClose, fetchProducts }) => {
           />
         </div>
 
-        <div className="form-group" style={{ marginTop: '0.5rem' }}>
+        <div className="form-group form-group-mt">
           <label>Imágenes del Producto *</label>
 
-          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem', height: '42px' }}>
-            <div className="file-upload-wrapper" style={{ flex: 1, height: '100%' }}>
+          <div className="form-upload-row">
+            <div className="form-upload-col">
               <input
                 type="file"
                 accept="image/*"
@@ -271,33 +272,31 @@ const ProductFormModal = ({ productToEdit, onClose, fetchProducts }) => {
               />
               <label
                 htmlFor="file-upload-input"
-                className="btn-file-upload"
-                style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0', border: '1px dashed rgba(58, 219, 241, 0.4)', background: 'rgba(58, 219, 241, 0.05)', borderRadius: '0.5rem', margin: 0 }}
+                className="btn-file-upload-full"
               >
                 {uploading ? (
                   <span className="spinner-small mr-2" />
                 ) : (
-                  <Upload size={16} className="mr-2 inline" style={{ color: 'var(--color-nova-cyan)' }} />
+                  <Upload size={16} className="upload-icon-cyan" />
                 )}
-                <span style={{ color: 'white', fontWeight: 'bold', fontSize: '0.85rem' }}>
+                <span className="upload-text-bold">
                   {uploading ? "Subiendo..." : "SUBIR IMAGEN"}
                 </span>
               </label>
             </div>
-            <span style={{ fontSize: '0.85rem', color: '#666', fontWeight: 'bold' }}>O</span>
-            <div className="url-upload-wrapper" style={{ flex: 1, display: 'flex', height: '100%' }}>
+            <span className="upload-separator">O</span>
+            <div className="url-upload-wrapper-flex">
               <input
                 type="text"
                 placeholder="Pegar URL de internet..."
                 value={imageUrlInput}
                 onChange={(e) => setImageUrlInput(e.target.value)}
-                style={{ flex: 1, borderRadius: '0.5rem 0 0 0.5rem' }}
+                className="url-upload-input-flex"
               />
               <button
                 type="button"
-                className="btn-add-url"
+                className="btn-add-url-flex"
                 onClick={handleAddImageUrl}
-                style={{ borderRadius: '0 0.5rem 0.5rem 0', background: 'var(--color-nova-cyan)', color: 'black' }}
               >
                 Agregar
               </button>
@@ -320,7 +319,7 @@ const ProductFormModal = ({ productToEdit, onClose, fetchProducts }) => {
           </div>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <div className="form-badges-container">
           <div className="form-group">
             <label>Etiquetas (Badges)</label>
             <div className="badge-input-wrapper">

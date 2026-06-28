@@ -5,7 +5,7 @@ import api from "../../services/api";
 import AdminSidebar from "../../components/admin/AdminSidebar";
 import DashboardStats from "../../components/admin/DashboardStats";
 import RecentOrdersTable from "../../components/admin/RecentOrdersTable";
-import "../../styles/Admin.css";
+import "../../styles/admin/AdminLayout.css";
 
 const AdminDashboard = () => {
   const { user } = useContext(AuthContext);

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Search, Edit, Trash2 } from "lucide-react";
+import { Search, Edit3, Trash2 } from "lucide-react";
+import "../../styles/admin/AdminTables.css";
 
 const ProductListTable = ({
   products,
@@ -70,7 +71,7 @@ const ProductListTable = ({
                         className="table-product-thumbnail"
                       />
                     </td>
-                    <td className="font-bold">{prod.name}</td>
+                    <td className="admin-table-font-bold">{prod.name}</td>
                     <td>{prod.category}</td>
                     <td>${prod.price.toFixed(2)}</td>
                     <td>{prod.discountPrice ? `$${prod.discountPrice.toFixed(2)}` : "-"}</td>
@@ -85,7 +86,7 @@ const ProductListTable = ({
                           className="btn-action-edit"
                           onClick={() => handleOpenEditForm(prod)}
                         >
-                          <Edit size={14} />
+                          <Edit3 size={14} />
                         </button>
                         <button
                           className="btn-action-delete"

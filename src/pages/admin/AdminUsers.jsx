@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import api from "../../services/api";
 import AdminSidebar from "../../components/admin/AdminSidebar";
 import UserListTable from "../../components/admin/UserListTable";
-import "../../styles/Admin.css";
+import "../../styles/admin/AdminLayout.css";
 
 const AdminUsers = () => {
   const { user } = useContext(AuthContext);

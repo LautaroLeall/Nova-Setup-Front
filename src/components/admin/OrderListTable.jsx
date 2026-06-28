@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Eye } from "lucide-react";
+import "../../styles/admin/AdminTables.css";
 import OrderDetailsExpanded from "./OrderDetailsExpanded";
 import api from "../../services/api";
 import { showConfirmDialog, showSuccessAlert, showErrorAlert } from "../../utils/swalConfig";
@@ -60,15 +61,15 @@ const OrderListTable = ({ orders, fetchOrders }) => {
             return (
               <Fragment key={order._id}>
                 <tr className="row-order-header">
-                  <td className="font-mono text-xs">#{order._id.slice(-8).toUpperCase()}</td>
+                  <td className="admin-table-font-mono admin-table-text-xs">#{order._id.slice(-8).toUpperCase()}</td>
                   <td>
                     <div className="client-cell-info">
                       <strong>{order.user ? `${order.user.firstName} ${order.user.lastName}` : "Usuario Eliminado"}</strong>
-                      <span className="text-xs text-white/40 block">{order.user?.email}</span>
+                      <span className="admin-table-text-dim">{order.user?.email}</span>
                     </div>
                   </td>
                   <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                  <td className="font-bold">${order.totalPrice.toFixed(2)}</td>
+                  <td className="admin-table-font-bold">${order.totalPrice.toFixed(2)}</td>
                   <td>
                     <span className={`badge-pago ${order.isPaid ? "pagado" : "pendiente"}`}>
                       {order.isPaid ? "Pagado" : "Pendiente"}
