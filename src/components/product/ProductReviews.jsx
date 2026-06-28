@@ -1,5 +1,6 @@
 import { Star } from "lucide-react";
 import { motion } from "framer-motion";
+import "../../styles/product/ProductReviews.css";
 
 export const ProductReviews = ({ reviews, canReview, daysLeft, rating, setRating, comment, setComment, submittingReview, submitReviewHandler }) => {
   return (

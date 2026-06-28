@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
+import "../../styles/product/ProductGallery.css";
 
 export const ProductGallery = ({ product }) => {
   const [currentImageIdx, setCurrentImageIdx] = useState(0);

@@ -5,7 +5,7 @@ import { ShopFilters } from "../components/shop/ShopFilters";
 import Footer from "../components/layout/Footer";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import "../styles/Shop.css";
+import "../styles/shop/ShopLayout.css";
 
 export const Shop = () => {
   const {

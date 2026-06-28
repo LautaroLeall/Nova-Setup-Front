@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { Shield, Truck, RotateCcw } from "lucide-react";
+import "../../styles/product/ProductInfo.css";
 
 export const ProductInfo = ({ product }) => {
   return (
