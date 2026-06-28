@@ -6,6 +6,20 @@ const api = axios.create({
   withCredentials: true, // Esto es crucial para enviar/recibir cookies HttpOnly (como el JWT)
 });
 
+// Interceptor de peticiones: Adjuntar Bearer token si existe en localStorage
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("nova_token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 // Manejador genérico de errores (opcional pero recomendado)
 api.interceptors.response.use(
   (response) => response,
