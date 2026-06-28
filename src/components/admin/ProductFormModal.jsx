@@ -64,8 +64,13 @@ const ProductFormModal = ({ productToEdit, onClose, fetchProducts }) => {
   };
 
   const handleAddImageUrl = () => {
-    if (imageUrlInput.trim()) {
-      setFormImages((prev) => [...prev, imageUrlInput.trim()]);
+    const url = imageUrlInput.trim();
+    if (url) {
+      if (!/^https?:\/\//i.test(url)) {
+        showErrorAlert("Validación", "La URL de la imagen debe comenzar con http:// o https://");
+        return;
+      }
+      setFormImages((prev) => [...prev, url]);
       setImageUrlInput("");
     }
   };
@@ -108,12 +113,16 @@ const ProductFormModal = ({ productToEdit, onClose, fetchProducts }) => {
       return;
     }
 
-    if (formName.length > 50) return showErrorAlert("Validación", "El nombre del producto no puede exceder los 50 caracteres.");
-    if (formBrand.length > 25) return showErrorAlert("Validación", "La marca no puede exceder los 25 caracteres.");
-    if (Number(formPrice) < 0) return showErrorAlert("Validación", "El precio no puede ser negativo.");
-    if (formDiscountPrice && Number(formDiscountPrice) < 0) return showErrorAlert("Validación", "El descuento no puede ser negativo.");
-    if (Number(formStock) < 0) return showErrorAlert("Validación", "El stock no puede ser un número negativo.");
-    if (formDescription.length > 250) return showErrorAlert("Validación", "La descripción excede el límite de 250 caracteres.");
+    if (formName.trim().length < 3 || formName.trim().length > 100) return showErrorAlert("Validación", "El nombre debe tener entre 3 y 100 caracteres.");
+    if (formBrand.trim().length < 2 || formBrand.trim().length > 50) return showErrorAlert("Validación", "La marca debe tener entre 2 y 50 caracteres.");
+    if (Number(formPrice) <= 0) return showErrorAlert("Validación", "El precio debe ser mayor a 0.");
+    if (formDiscountPrice) {
+      const dPrice = Number(formDiscountPrice);
+      if (dPrice < 0) return showErrorAlert("Validación", "El descuento no puede ser negativo.");
+      if (dPrice >= Number(formPrice)) return showErrorAlert("Validación", "El precio con descuento debe ser estrictamente menor al precio original.");
+    }
+    if (Number(formStock) < 0 || !Number.isInteger(Number(formStock))) return showErrorAlert("Validación", "El stock debe ser un número entero mayor o igual a 0.");
+    if (formDescription.trim().length < 10 || formDescription.trim().length > 1000) return showErrorAlert("Validación", "La descripción debe tener entre 10 y 1000 caracteres.");
 
     const productPayload = {
       name: formName,
@@ -162,14 +171,15 @@ const ProductFormModal = ({ productToEdit, onClose, fetchProducts }) => {
         <div className="form-group">
           <div className="form-field-header">
             <label>Nombre del Producto *</label>
-            <span className={`form-char-count ${formName.length >= 50 ? 'limit-reached' : ''}`}>{formName.length}/50</span>
+            <span className={`form-char-count ${formName.length >= 100 ? 'limit-reached' : ''}`}>{formName.length}/100</span>
           </div>
           <input
             type="text"
             placeholder="Ej: Teclado Mecánico Nova 75%"
             value={formName}
             onChange={(e) => setFormName(e.target.value)}
-            maxLength={50}
+            minLength={3}
+            maxLength={100}
             required
           />
         </div>
@@ -178,14 +188,15 @@ const ProductFormModal = ({ productToEdit, onClose, fetchProducts }) => {
           <div className="form-group">
             <div className="form-field-header">
               <label>Marca *</label>
-              <span className={`form-char-count ${formBrand.length >= 25 ? 'limit-reached' : ''}`}>{formBrand.length}/25</span>
+              <span className={`form-char-count ${formBrand.length >= 50 ? 'limit-reached' : ''}`}>{formBrand.length}/50</span>
             </div>
             <input
               type="text"
               placeholder="Ej: Nova"
               value={formBrand}
               onChange={(e) => setFormBrand(e.target.value)}
-              maxLength={25}
+              minLength={2}
+              maxLength={50}
               required
             />
           </div>
@@ -197,8 +208,19 @@ const ProductFormModal = ({ productToEdit, onClose, fetchProducts }) => {
               required
             >
               <option value="">Selecciona...</option>
-              <option value="Teclados">Teclados</option>
+              {/* Categorías PC Builder */}
+              <option value="Procesadores">Procesadores</option>
+              <option value="Mothers">Mothers</option>
+              <option value="Coolers">Coolers</option>
+              <option value="Memorias RAM">Memorias RAM</option>
+              <option value="Placas de Video">Placas de Video</option>
+              <option value="Almacenamiento">Almacenamiento</option>
+              <option value="Fuentes">Fuentes</option>
+              <option value="Gabinetes">Gabinetes</option>
+              {/* Otras categorías */}
               <option value="Monitores">Monitores</option>
+              <option value="Periféricos">Periféricos</option>
+              <option value="Teclados">Teclados</option>
               <option value="Ratones">Ratones</option>
               <option value="Audio">Audio</option>
               <option value="Accesorios">Accesorios</option>
@@ -246,11 +268,12 @@ const ProductFormModal = ({ productToEdit, onClose, fetchProducts }) => {
         <div className="form-group">
           <div className="form-field-header">
             <label>Descripción *</label>
-            <span className={`form-char-count ${formDescription.length >= 250 ? 'limit-reached' : ''}`}>{formDescription.length}/250</span>
+            <span className={`form-char-count ${formDescription.length >= 1000 ? 'limit-reached' : ''}`}>{formDescription.length}/1000</span>
           </div>
           <textarea
-            rows="3"
-            maxLength={250}
+            rows="5"
+            minLength={10}
+            maxLength={1000}
             placeholder="Escribe una breve descripción del producto..."
             value={formDescription}
             onChange={(e) => setFormDescription(e.target.value)}
