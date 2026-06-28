@@ -1,5 +1,6 @@
 import { Package, Calendar, CheckCircle2, Clock, ChevronDown, ChevronUp, AlertCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import "../../styles/profile/UserOrdersList.css";
 
 export const UserOrdersList = ({
   loading,
@@ -48,12 +49,12 @@ export const UserOrdersList = ({
                   <div className="order-summary-info">
                     <div className="info-block">
                       <span className="block-label">ID PEDIDO</span>
-                      <span className="block-val font-mono">#{order._id.slice(-8).toUpperCase()}</span>
+                      <span className="block-val orders-font-mono">#{order._id.slice(-8).toUpperCase()}</span>
                     </div>
                     <div className="info-block">
                       <span className="block-label">FECHA</span>
-                      <span className="block-val text-xs align-middle">
-                        <Calendar size={13} className="inline mr-1" />
+                      <span className="block-val orders-text-small">
+                        <Calendar size={13} className="orders-inline-icon" />
                         {new Date(order.createdAt).toLocaleDateString()}
                       </span>
                     </div>
@@ -107,20 +108,9 @@ export const UserOrdersList = ({
                                   <span className="item-price">${(item.price * item.qty).toFixed(2)}</span>
                                   {order.isUserConfirmed && (
                                     <button
-                                      className="btn-review-item"
+                                      className={`orders-review-btn ${isReviewed ? 'orders-review-btn--done' : 'orders-review-btn--pending'}`}
                                       onClick={() => openReviewModal({ _id: item.product, name: item.name, orderId: order._id })}
                                       disabled={isReviewed}
-                                      style={{
-                                        marginTop: '0.5rem',
-                                        padding: '0.4rem 0.8rem',
-                                        fontSize: '0.8rem',
-                                        background: isReviewed ? 'rgba(255,255,255,0.1)' : 'var(--color-nova-cyan)',
-                                        color: isReviewed ? '#888' : 'black',
-                                        border: 'none',
-                                        borderRadius: '0.3rem',
-                                        cursor: isReviewed ? 'not-allowed' : 'pointer',
-                                        fontWeight: 'bold'
-                                      }}
                                     >
                                       {isReviewed ? "Ya Reseñado" : "Calificar"}
                                     </button>
@@ -141,7 +131,9 @@ export const UserOrdersList = ({
                             <p><strong>Teléfono:</strong> {order.shippingAddress.phone || "No provisto"}</p>
                           </div>
                           <div className="shipping-status-block">
-                            <h4 className="detail-section-title">Resumen de Pago y Entrega</h4>
+                            <h4 className="detail-section-title">
+                              Resumen de Pago y Entrega
+                            </h4>
                             <p><strong>Método:</strong> Mercado Pago</p>
                             {order.isPaid ? (
                               <>
@@ -151,17 +143,21 @@ export const UserOrdersList = ({
                                 )}
                               </>
                             ) : (
-                              <p className="pending-notice">Pago pendiente. Recuerda completar tu pago desde el brick de Mercado Pago.</p>
+                              <p className="pending-notice">
+                                Pago pendiente. Recuerda completar tu pago desde el brick de Mercado Pago.
+                              </p>
                             )}
 
-                            <div className="divider-admin-light" style={{ margin: '1rem 0' }} />
+                            <div className="divider-admin-light orders-list-divider" />
 
                             {order.isDelivered && !order.isUserConfirmed && (
-                              <div className="confirm-delivery-box" style={{ background: 'rgba(58, 219, 241, 0.05)', padding: '1rem', borderRadius: '0.5rem', border: '1px solid rgba(58, 219, 241, 0.2)', marginTop: '1rem' }}>
-                                <p style={{ fontSize: '0.85rem', marginBottom: '0.75rem' }}>El administrador ha marcado este pedido como enviado/entregado. Por favor confirma la recepción una vez que lo tengas en tus manos.</p>
+                              <div className="orders-confirm-box">
+                                <p className="orders-confirm-text">
+                                  El administrador ha marcado este pedido como enviado/entregado. Por favor confirma la recepción una vez que lo tengas en tus manos.
+                                </p>
                                 <button
                                   onClick={() => handleConfirmDelivery(order._id)}
-                                  style={{ background: 'var(--color-nova-cyan)', color: 'black', padding: '0.6rem 1rem', borderRadius: '0.5rem', fontWeight: 'bold', width: '100%', border: 'none', cursor: 'pointer' }}
+                                  className="orders-confirm-btn"
                                 >
                                   Confirmar Recepción
                                 </button>
@@ -169,9 +165,11 @@ export const UserOrdersList = ({
                             )}
 
                             {order.isUserConfirmed && (
-                              <div className="confirmed-delivery-box" style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid rgba(16, 185, 129, 0.3)', marginTop: '1rem', color: '#10b981', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem' }}>
+                              <div className="orders-delivery-confirmed-box">
                                 <CheckCircle2 size={16} />
-                                <span>Recepción Confirmada por ti</span>
+                                <span>
+                                  Recepción Confirmada por ti
+                                </span>
                               </div>
                             )}
                           </div>

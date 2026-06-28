@@ -7,9 +7,10 @@ import { showConfirmDialog } from "../utils/swalConfig";
 import { sileo } from "sileo";
 import ProfileSettingsForm from "../components/profile/ProfileSettingsForm";
 import UserOrdersList from "../components/profile/UserOrdersList";
+import UserFavoritesList from "../components/profile/UserFavoritesList";
 import UserProfileSidebar from "../components/profile/UserProfileSidebar";
 import ReviewFormModal from "../components/profile/ReviewFormModal";
-import "../styles/UserProfile.css";
+import "../styles/profile/UserProfileLayout.css";
 
 const UserProfile = () => {
   const { user, updateUserProfile } = useContext(AuthContext);
@@ -211,6 +212,10 @@ const UserProfile = () => {
               openReviewModal={openReviewModal}
               handleConfirmDelivery={handleConfirmDelivery}
             />
+          )}
+
+          {activeTab === "favorites" && (
+            <UserFavoritesList />
           )}
 
           {activeTab === "settings" && (
