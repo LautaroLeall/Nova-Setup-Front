@@ -101,7 +101,7 @@ export const ProductBuyBox = ({
             onClick={handleNotifyRestock}
             disabled={isNotifying}
           >
-            <Bell size={18} />
+            <BellRing size={18} />
             {isNotifying ? "Cargando..." : "Avisarme cuando haya stock"}
           </button>
         )}
