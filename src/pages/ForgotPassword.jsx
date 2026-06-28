@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import { useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 import { motion } from "framer-motion";
 import { sileo } from "sileo";
 import { ArrowLeft, AlertCircle } from "lucide-react";
-import "../styles/Login.css";
+import "../styles/auth/Login.css";
 
 const ForgotPassword = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -14,7 +14,7 @@ const ForgotPassword = () => {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/forgot-password`, {
+      const response = await api.post(`/api/users/forgot-password`, {
         email: data.email
       });
       sileo.success({

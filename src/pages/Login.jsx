@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useGoogleLogin } from '@react-oauth/google';
 import { sileo } from "sileo";
 import { ArrowLeft, Eye, EyeOff, AlertCircle } from "lucide-react";
-import "../styles/Login.css";
+import "../styles/auth/Login.css";
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -136,7 +136,7 @@ const Login = () => {
           {/* Input Password */}
           <div className="login-input-group">
             <div className="login-input-glow"></div>
-            <div className="login-input-wrapper" style={{ position: "relative" }}>
+            <div className="login-input-wrapper auth-relative-wrapper">
               <label className="login-label">Contraseña</label>
               <input
                 type={showPassword ? "text" : "password"}
@@ -157,8 +157,8 @@ const Login = () => {
             )}
           </div>
 
-          <div style={{ textAlign: "right", marginTop: "-0.5rem", marginBottom: "1.5rem" }}>
-            <Link to="/forgot-password" style={{ color: "var(--color-nova-cyan)", fontSize: "0.85rem", textDecoration: "none", opacity: 0.8, transition: "opacity 0.2s" }} onMouseOver={(e) => e.currentTarget.style.opacity = 1} onMouseOut={(e) => e.currentTarget.style.opacity = 0.8}>
+          <div className="auth-forgot-pwd-container">
+            <Link to="/forgot-password" className="auth-forgot-pwd-link">
               ¿Olvidaste tu contraseña?
             </Link>
           </div>
@@ -178,26 +178,7 @@ const Login = () => {
           <button
             type="button"
             disabled={isLoading}
-            className="login-submit-btn"
-            style={{
-              background: 'transparent',
-              color: 'var(--color-text)',
-              border: '1px solid var(--color-border)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              transition: 'all 0.3s ease',
-              marginTop: '0'
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-              e.currentTarget.style.borderColor = 'var(--color-text-dim)';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = 'var(--color-border)';
-            }}
+            className="login-submit-btn auth-google-btn"
             onClick={() => loginWithGoogle()}
           >
             <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">

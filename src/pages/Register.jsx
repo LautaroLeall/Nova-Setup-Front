@@ -7,7 +7,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { showInfoAlert } from '../utils/swalConfig';
 import { sileo } from "sileo";
 import { ArrowLeft, Eye, EyeOff, AlertCircle } from "lucide-react";
-import "../styles/Register.css";
+import "../styles/auth/Register.css";
 
 const Register = () => {
   const { register: registerForm, handleSubmit, formState: { errors }, getValues } = useForm();
@@ -116,9 +116,9 @@ const Register = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="register-form">
 
           {/* Fila para Nombre y Apellido */}
-          <div style={{ display: 'flex', gap: '1rem', width: '100%' }}>
+          <div className="auth-flex-row">
             {/* Input Nombre */}
-            <div className="register-input-group" style={{ flex: 1 }}>
+            <div className="register-input-group auth-flex-col">
               <div className="register-input-glow"></div>
               <div className="register-input-wrapper">
                 <label className="register-label">Nombre</label>
@@ -136,7 +136,7 @@ const Register = () => {
             </div>
 
             {/* Input Apellido */}
-            <div className="register-input-group" style={{ flex: 1 }}>
+            <div className="register-input-group auth-flex-col">
               <div className="register-input-glow"></div>
               <div className="register-input-wrapper">
                 <label className="register-label">Apellido</label>
@@ -178,7 +178,7 @@ const Register = () => {
           {/* Input Password */}
           <div className="register-input-group">
             <div className="register-input-glow"></div>
-            <div className="register-input-wrapper" style={{ position: "relative" }}>
+            <div className="register-input-wrapper auth-relative-wrapper">
               <label className="register-label">Contraseña</label>
               <input
                 type={showPassword ? "text" : "password"}
@@ -205,7 +205,7 @@ const Register = () => {
           {/* Input Confirm Password */}
           <div className="register-input-group">
             <div className="register-input-glow"></div>
-            <div className="register-input-wrapper" style={{ position: "relative" }}>
+            <div className="register-input-wrapper auth-relative-wrapper">
               <label className="register-label">Confirmar Contraseña</label>
               <input
                 type={showConfirmPassword ? "text" : "password"}
@@ -244,26 +244,7 @@ const Register = () => {
           <button
             type="button"
             disabled={isLoading}
-            className="register-submit-btn"
-            style={{
-              background: 'transparent',
-              color: 'var(--color-text)',
-              border: '1px solid var(--color-border)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              transition: 'all 0.3s ease',
-              marginTop: '0'
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-              e.currentTarget.style.borderColor = 'var(--color-text-dim)';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = 'var(--color-border)';
-            }}
+            className="register-submit-btn auth-google-btn"
             onClick={() => loginWithGoogle()}
           >
             <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
