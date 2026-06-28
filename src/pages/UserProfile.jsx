@@ -152,10 +152,14 @@ const UserProfile = () => {
     const { name, value } = e.target;
     if (name.startsWith("shipping_")) {
       const field = name.replace("shipping_", "");
-      setFormData(prev => ({
-        ...prev,
-        shippingAddress: { ...prev.shippingAddress, [field]: value }
-      }));
+      setFormData(prev => {
+        const newData = { ...prev };
+        newData.shippingAddress = { ...prev.shippingAddress, [field]: value };
+        if (field === "province") {
+          newData.shippingAddress.city = ""; // Reiniciar ciudad si cambia provincia
+        }
+        return newData;
+      });
     } else {
       setFormData(prev => ({ ...prev, [name]: value }));
     }
@@ -164,7 +168,17 @@ const UserProfile = () => {
   const submitProfileUpdate = async (e) => {
     e.preventDefault();
     setUpdatingProfile(true);
-    const result = await updateUserProfile(formData);
+    
+    // Si la ciudad es "Otra", enviamos cityOther como la ciudad real
+    const dataToSend = { ...formData };
+    if (dataToSend.shippingAddress.city === "Otra" && dataToSend.shippingAddress.cityOther) {
+      dataToSend.shippingAddress = {
+        ...dataToSend.shippingAddress,
+        city: dataToSend.shippingAddress.cityOther
+      };
+    }
+
+    const result = await updateUserProfile(dataToSend);
     setUpdatingProfile(false);
 
     if (result.success) {
