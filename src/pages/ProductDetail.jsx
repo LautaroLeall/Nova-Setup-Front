@@ -9,7 +9,7 @@ import ProductGallery from "../components/product/ProductGallery";
 import ProductInfo from "../components/product/ProductInfo";
 import ProductReviews from "../components/product/ProductReviews";
 import ProductBuyBox from "../components/product/ProductBuyBox";
-import "../styles/ProductDetail.css";
+import "../styles/product/ProductDetailLayout.css";
 
 // API URL centralizada en services/api.js
 

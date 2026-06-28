@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Star, Package, ShoppingCart, Bell, Heart } from "lucide-react";
+import { Star, Package, ShoppingCart, Heart, BellRing } from "lucide-react";
+import "../../styles/product/ProductBuyBox.css";
 
 export const ProductBuyBox = ({
   product,

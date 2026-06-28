@@ -2,6 +2,7 @@ import { useMemo, useState, useContext } from "react";
 import { ProductContext } from "../../context/ProductContext";
 import { Filter, X, ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import "../../styles/shop/ShopFilters.css";
 
 const CollapsibleFilter = ({ title, children, defaultOpen = false }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -166,7 +167,7 @@ export const ShopFilters = () => {
 
             {/* Categorías */}
             <div className="shop-sidebar-box filter-group">
-              <CollapsibleFilter title="Categorías" defaultOpen={true}>
+              <CollapsibleFilter title="Categorías" defaultOpen={false}>
                 <ul className="shop-category-list">
                   {availableCategories.map((cat) => (
                     <li key={cat}>
@@ -184,7 +185,7 @@ export const ShopFilters = () => {
 
             {/* Precio */}
             {globalMaxPrice > 0 && (
-              <CollapsibleFilter title="Precio Máximo" defaultOpen={true}>
+              <CollapsibleFilter title="Precio Máximo" defaultOpen={false}>
                 <div className="filter-price-content">
                   <div className="price-display">${displayMaxPrice}</div>
                   <input

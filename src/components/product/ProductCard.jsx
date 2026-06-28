@@ -4,7 +4,7 @@ import { sileo } from "sileo";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { AuthContext } from "../../context/AuthContext";
-import "../../styles/ProductCard.css";
+import "../../styles/product/ProductCard.css";
 
 export const ProductCard = ({ product }) => {
   const { _id, name, brand, price, discountPrice, images, countInStock } = product;
