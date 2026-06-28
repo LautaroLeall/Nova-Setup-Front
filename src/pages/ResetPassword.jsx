@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams, Link } from "react-router";
 import { useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 import { motion } from "framer-motion";
 import { sileo } from "sileo";
 import { Eye, EyeOff, AlertCircle } from "lucide-react";
-import "../styles/Login.css";
+import "../styles/auth/Login.css";
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -18,7 +18,7 @@ const ResetPassword = () => {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/users/reset-password/${token}`, {
+      const response = await api.put(`/api/users/reset-password/${token}`, {
         password: data.password
       });
       sileo.success({
@@ -84,7 +84,7 @@ const ResetPassword = () => {
           {/* Input Password */}
           <div className="login-input-group">
             <div className="login-input-glow"></div>
-            <div className="login-input-wrapper" style={{ position: "relative" }}>
+            <div className="login-input-wrapper auth-relative-wrapper">
               <label className="login-label">Nueva Contraseña</label>
               <input
                 type={showPassword ? "text" : "password"}
@@ -111,7 +111,7 @@ const ResetPassword = () => {
           {/* Input Confirm Password */}
           <div className="login-input-group">
             <div className="login-input-glow"></div>
-            <div className="login-input-wrapper" style={{ position: "relative" }}>
+            <div className="login-input-wrapper auth-relative-wrapper">
               <label className="login-label">Confirmar Contraseña</label>
               <input
                 type={showConfirmPassword ? "text" : "password"}

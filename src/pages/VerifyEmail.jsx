@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router"; // V6 router
-import axios from "axios";
+import { useParams, Link } from "react-router";
+import api from "../services/api";
 import { CheckCircle2, XCircle } from "lucide-react";
+import "../styles/auth/VerifyEmail.css";
 
 const VerifyEmail = () => {
   const { token } = useParams();
@@ -11,7 +12,7 @@ const VerifyEmail = () => {
   useEffect(() => {
     const verifyToken = async () => {
       try {
-        const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/verify/${token}`);
+        const { data } = await api.get(`/api/users/verify/${token}`);
         setStatus("success");
         setMessage(data.message);
       } catch (error) {
@@ -23,33 +24,33 @@ const VerifyEmail = () => {
   }, [token]);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', background: 'var(--color-bg-dark)', padding: '2rem' }}>
-      <div style={{ background: 'var(--color-bg-light)', border: '1px solid var(--color-border)', borderRadius: '1rem', padding: '3rem', textAlign: 'center', maxWidth: '500px', width: '100%', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+    <div className="verify-page">
+      <div className="verify-card">
         {status === "loading" && (
           <div>
-            <div className="spinner" style={{ width: '40px', height: '40px', margin: '0 auto 1rem' }} />
-            <h2 style={{ color: 'white', marginBottom: '1rem' }}>Verificando tu cuenta...</h2>
-            <p style={{ color: 'var(--color-text-dim)' }}>Espera un momento mientras validamos tu enlace.</p>
+            <div className="spinner verify-spinner" />
+            <h2 className="verify-title">Verificando tu cuenta...</h2>
+            <p className="verify-text">Espera un momento mientras validamos tu enlace.</p>
           </div>
         )}
 
         {status === "success" && (
-          <div style={{ color: '#10b981' }}>
-            <CheckCircle2 size={64} style={{ margin: '0 auto 1rem' }} />
-            <h2 style={{ color: 'white', marginBottom: '1rem' }}>¡Cuenta Verificada!</h2>
-            <p style={{ color: 'var(--color-text-dim)', marginBottom: '2rem' }}>{message}</p>
-            <Link to="/login" style={{ display: 'inline-block', padding: '12px 24px', background: 'var(--color-nova-cyan)', color: '#000', fontWeight: 'bold', textDecoration: 'none', borderRadius: '5px' }}>
+          <div className="verify-status-success">
+            <CheckCircle2 size={64} className="verify-icon" />
+            <h2 className="verify-title">¡Cuenta Verificada!</h2>
+            <p className="verify-text--margin">{message}</p>
+            <Link to="/login" className="verify-btn-login">
               Ir a Iniciar Sesión
             </Link>
           </div>
         )}
 
         {status === "error" && (
-          <div style={{ color: '#ef4444' }}>
-            <XCircle size={64} style={{ margin: '0 auto 1rem' }} />
-            <h2 style={{ color: 'white', marginBottom: '1rem' }}>Error de Verificación</h2>
-            <p style={{ color: 'var(--color-text-dim)', marginBottom: '2rem' }}>{message}</p>
-            <Link to="/login" style={{ color: 'var(--color-nova-cyan)', textDecoration: 'none', fontWeight: 'bold' }}>Volver al inicio</Link>
+          <div className="verify-status-error">
+            <XCircle size={64} className="verify-icon" />
+            <h2 className="verify-title">Error de Verificación</h2>
+            <p className="verify-text--margin">{message}</p>
+            <Link to="/login" className="verify-link-back">Volver al inicio</Link>
           </div>
         )}
       </div>
