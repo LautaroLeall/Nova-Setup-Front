@@ -14,7 +14,7 @@ const ForgotPassword = lazy(() => import("../pages/ForgotPassword"));
 const ResetPassword = lazy(() => import("../pages/ResetPassword"));
 const VerifyEmail = lazy(() => import("../pages/VerifyEmail"));
 const ProductDetail = lazy(() => import("../pages/ProductDetail"));
-const Favoritos = lazy(() => import("../pages/Favoritos"));
+
 const Checkout = lazy(() => import("../pages/Checkout"));
 const UserProfile = lazy(() => import("../pages/UserProfile"));
 const OrderSuccess = lazy(() => import("../pages/OrderSuccess"));
@@ -30,22 +30,8 @@ const AdminUsers = lazy(() => import("../pages/admin/AdminUsers"));
 
 // Fallback de carga mínimo y sin layout para evitar flashes
 const PageLoader = () => (
-  <div style={{
-    minHeight: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    background: "#101018",
-  }}>
-    <div style={{
-      width: 40,
-      height: 40,
-      border: "3px solid rgba(58,219,241,0.2)",
-      borderTopColor: "#3adbf1",
-      borderRadius: "50%",
-      animation: "spin 0.7s linear infinite",
-    }} />
-    <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+  <div className="page-loader-container">
+    <div className="page-loader-spinner" />
   </div>
 );
 
@@ -65,7 +51,7 @@ const AppRoutes = () => {
           <Route path="/verify-email/:token" element={<VerifyEmail />} />
           <Route path="/product/:id" element={<ProductDetail />} />
 
-          <Route path="/favoritos" element={<ProtectedRoute><Favoritos /></ProtectedRoute>} />
+
           <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
           <Route path="/perfil" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
 

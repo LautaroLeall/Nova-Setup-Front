@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { User, Package } from "lucide-react";
+import { User, Package, Heart } from "lucide-react";
+import "../../styles/profile/UserProfileSidebar.css";
 
 export const UserProfileSidebar = ({ user, activeTab, setActiveTab }) => {
   return (
@@ -19,28 +20,23 @@ export const UserProfileSidebar = ({ user, activeTab, setActiveTab }) => {
           {user.isAdmin ? "Administrador" : "Cliente"}
         </div>
 
-        <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <div className="profile-sidebar-tabs">
           <button
             onClick={() => setActiveTab("orders")}
-            style={{
-              background: activeTab === "orders" ? 'var(--color-nova-cyan)' : 'transparent',
-              color: activeTab === "orders" ? 'black' : 'white',
-              border: activeTab === "orders" ? 'none' : '1px solid rgba(255,255,255,0.2)',
-              padding: '0.8rem', borderRadius: '0.5rem', cursor: 'pointer', fontWeight: 'bold', transition: 'all 0.2s',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem'
-            }}
+            className={`profile-tab-btn ${activeTab === "orders" ? "active" : ""}`}
           >
             <Package size={16} /> Mis Pedidos
           </button>
           <button
+            onClick={() => setActiveTab("favorites")}
+            className={`profile-tab-btn ${activeTab === "favorites" ? "active" : ""}`}
+          >
+            <Heart size={16} /> Mis Favoritos
+          </button>
+
+          <button
             onClick={() => setActiveTab("settings")}
-            style={{
-              background: activeTab === "settings" ? 'var(--color-nova-cyan)' : 'transparent',
-              color: activeTab === "settings" ? 'black' : 'white',
-              border: activeTab === "settings" ? 'none' : '1px solid rgba(255,255,255,0.2)',
-              padding: '0.8rem', borderRadius: '0.5rem', cursor: 'pointer', fontWeight: 'bold', transition: 'all 0.2s',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem'
-            }}
+            className={`profile-tab-btn ${activeTab === "settings" ? "active" : ""}`}
           >
             <User size={16} /> Configuración de Perfil
           </button>

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Star, X } from "lucide-react";
+import "../../styles/profile/ReviewFormModal.css";
 
 export const ReviewFormModal = ({
   reviewModal,
@@ -32,7 +33,7 @@ export const ReviewFormModal = ({
               <Star
                 key={star}
                 size={32}
-                style={{ cursor: "pointer", transition: "all 0.2s" }}
+                className="review-star"
                 fill={star <= rating ? "var(--color-nova-cyan)" : "none"}
                 color={star <= rating ? "var(--color-nova-cyan)" : "rgba(255, 255, 255, 0.4)"}
                 onClick={() => setRating(star)}
