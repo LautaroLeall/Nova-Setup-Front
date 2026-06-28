@@ -1,0 +1,374 @@
+/* Hero.css */
+
+/* ── HeroEcommerce Wrapper ── */
+.hero-wrapper {
+  position: relative;
+  width: 100%;
+  background-color: transparent;
+  height: 500vh;
+}
+
+.hero-sticky-zone {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 1400px;
+}
+
+/* ── Título ── */
+.hero-title-container {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.hero-title-text-center {
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: white;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: 4.5rem;
+  }
+}
+
+.hero-subtitle {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 300;
+  color: #a682e7;
+  opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-subtitle {
+    font-size: 1.125rem;
+  }
+}
+
+/* ── MAC Container ── */
+.hero-mac-container {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  max-width: 62.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* ── MacScreen Component ── */
+.mac-wrapper {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.mac-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 1.75rem;
+  border: 4px solid #2a2a2a;
+  background-color: #1c1c1e;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.mac-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6rem;
+  height: 1.25rem;
+  background-color: #1c1c1e;
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0.25rem;
+}
+
+.mac-camera-outer {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background-color: #111;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mac-camera-inner {
+  width: 0.1875rem;
+  height: 0.1875rem;
+  background-color: rgba(96, 165, 250, 0.5);
+  border-radius: 9999px;
+}
+
+.mac-screen-content {
+  flex-grow: 1;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
+  background-color: #050505;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  border-bottom-left-radius: 0.125rem;
+  border-bottom-right-radius: 0.125rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mac-chin {
+  position: absolute;
+  bottom: 0.25rem;
+  left: 0;
+  right: 0;
+  height: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mac-chin-text {
+  font-size: 7px;
+  letter-spacing: 0.25em;
+  color: rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.mac-screen-inner-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #06060f;
+}
+
+.mac-carousel-dots {
+  position: absolute;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 20;
+}
+
+.mac-carousel-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+}
+
+.mac-carousel-dot.active {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.mac-carousel-dot.inactive {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.mac-carousel-wrapper {
+  display: flex;
+  height: 100%;
+}
+
+.mac-carousel-page {
+  width: 50%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.mac-product-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mac-product-wrapper:last-child {
+  border-bottom: 0;
+}
+
+/* ── ProductCard Component ── */
+.product-hero-card {
+  position: relative;
+  height: 100%;
+  flex: 1;
+  overflow: hidden;
+  cursor: pointer;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.product-hero-card:last-child {
+  border-right: 0;
+}
+
+.product-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 700ms;
+}
+
+.product-hero-card:hover .product-hero-img {
+  transform: scale(1.05);
+}
+
+.product-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: background-color 500ms;
+}
+
+.product-hero-card:hover .product-hero-overlay {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.product-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to top, black, rgba(0, 0, 0, 0.2), transparent);
+}
+
+.product-hero-badge-container {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+}
+
+.product-hero-badge {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: white;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.product-hero-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  transform: translateY(0.5rem);
+  transition: transform 300ms;
+}
+
+.product-hero-card:hover .product-hero-info {
+  transform: translateY(0);
+}
+
+.product-hero-brand {
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.125rem;
+  text-transform: uppercase;
+  color: #3adbf1;
+}
+
+.product-hero-name {
+  color: white;
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+}
+
+.product-hero-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-hero-price {
+  font-weight: 900;
+  font-size: 1rem;
+  color: #3adbf1;
+}
+
+.product-hero-add-btn {
+  color: white;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all 300ms;
+  border: none;
+  cursor: pointer;
+}
+
+.product-hero-add-btn:active {
+  transform: scale(0.9);
+}
+
+.product-hero-add-btn:disabled {
+  opacity: 0.3 !important;
+  cursor: not-allowed;
+}
+
+.product-hero-add-btn-hidden {
+  opacity: 0;
+}
+
+.product-hero-card:hover .product-hero-add-btn-hidden {
+  opacity: 1;
+}

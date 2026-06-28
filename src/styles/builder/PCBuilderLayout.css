@@ -1,0 +1,62 @@
+.pc-builder-page {
+  padding-top: 80px;
+  /* Compensa Navbar */
+  padding-bottom: 5rem;
+  min-height: 100vh;
+  background-color: var(--color-nova-bg);
+  color: white;
+  position: relative;
+  overflow: clip;
+  /* clip reemplaza hidden para no romper el position: sticky */
+}
+
+.builder-header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  background: radial-gradient(circle at 50% -20%, rgba(58, 219, 241, 0.15), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.builder-layout-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ==================
+   Layout Principal 
+   ================== */
+.builder-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .builder-main-content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .builder-left-col {
+    width: 72%;
+  }
+
+  .builder-right-col {
+    width: 28%;
+    align-self: flex-start;
+    position: sticky;
+    top: 100px;
+  }
+}
+
+.builder-sticky-sidebar {
+  position: relative;
+}
+
