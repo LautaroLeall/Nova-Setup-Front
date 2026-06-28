@@ -46,6 +46,10 @@ export const AuthProvider = ({ children }) => {
   const login = useCallback(async (email, password) => {
     try {
       const { data } = await api.post(`/api/users/login`, { email, password });
+
+      // Extraemos el token si viene en la respuesta, y lo guardamos
+      if (data.token) localStorage.setItem("nova_token", data.token);
+
       setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       return { success: true };
@@ -67,6 +71,9 @@ export const AuthProvider = ({ children }) => {
   const googleLogin = useCallback(async (tokenId) => {
     try {
       const { data } = await api.post(`/api/users/google-auth`, { tokenId });
+
+      if (data.token) localStorage.setItem("nova_token", data.token);
+
       setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       return { success: true };
@@ -89,6 +96,7 @@ export const AuthProvider = ({ children }) => {
         console.error("Error al hacer logout en servidor:", err);
       } finally {
         localStorage.removeItem("userInfo");
+        localStorage.removeItem("nova_token");
         setUser(null);
         setFavoriteIds([]);
       }
@@ -98,6 +106,9 @@ export const AuthProvider = ({ children }) => {
   const updateUserProfile = useCallback(async (profileData) => {
     try {
       const { data } = await api.put(`/api/users/profile`, profileData);
+
+      if (data.token) localStorage.setItem("nova_token", data.token);
+
       setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       return { success: true };
