@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams, Link } from "react-router";
 import api from "../services/api";
 import { CheckCircle2, XCircle } from "lucide-react";
@@ -8,8 +8,12 @@ const VerifyEmail = () => {
   const { token } = useParams();
   const [status, setStatus] = useState("loading");
   const [message, setMessage] = useState("");
+  const hasFetched = useRef(false);
 
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
     const verifyToken = async () => {
       try {
         const { data } = await api.get(`/api/users/verify/${token}`);
