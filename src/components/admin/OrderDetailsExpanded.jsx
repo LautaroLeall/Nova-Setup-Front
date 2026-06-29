@@ -40,24 +40,39 @@ const OrderDetailsExpanded = ({ order, handleStatusChange }) => {
                 <div className="detail-status-row">
                   <div className="detail-status-col">
                     <label className="detail-status-label">Estado de Pago</label>
-                    {order.isPaid ? (
+                    {order.status === "cancelled" ? (
+                      <div className="detail-status-display">
+                        <span className="badge-pago cancelado detail-badge-full" style={{ backgroundColor: '#ef4444', color: 'white', border: '1px solid #dc2626' }}>Cancelado</span>
+                      </div>
+                    ) : order.isPaid ? (
                       <div className="detail-status-display">
                         <span className="badge-pago pagado detail-badge-full">Pagado</span>
                       </div>
                     ) : (
                       <select
                         value={order.isPaid.toString()}
-                        onChange={(e) => handleStatusChange(order._id, { isPaid: e.target.value === 'true' })}
+                        onChange={(e) => {
+                          if (e.target.value === 'cancelled') {
+                            handleStatusChange(order._id, { status: 'cancelled' });
+                          } else {
+                            handleStatusChange(order._id, { isPaid: e.target.value === 'true' });
+                          }
+                        }}
                         className="detail-status-select"
                       >
                         <option value="false">Pendiente</option>
                         <option value="true">Pagado</option>
+                        <option value="cancelled">Cancelado</option>
                       </select>
                     )}
                   </div>
                   <div className="detail-status-col">
                     <label className="detail-status-label">Estado de Envío</label>
-                    {order.isDelivered || order.isUserConfirmed ? (
+                    {order.status === "cancelled" ? (
+                      <div className="detail-status-display">
+                        <span className="badge-envio cancelado detail-badge-full" style={{ backgroundColor: '#ef4444', color: 'white', border: '1px solid #dc2626' }}>Cancelado</span>
+                      </div>
+                    ) : order.isDelivered || order.isUserConfirmed ? (
                       <div className="detail-status-display">
                         <span className="badge-envio enviado detail-badge-full">Enviado / Entregado</span>
                       </div>
