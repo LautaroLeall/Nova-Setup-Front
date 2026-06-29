@@ -71,13 +71,13 @@ const OrderListTable = ({ orders, fetchOrders }) => {
                   <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                   <td className="admin-table-font-bold">${order.totalPrice.toFixed(2)}</td>
                   <td>
-                    <span className={`badge-pago ${order.isPaid ? "pagado" : "pendiente"}`}>
-                      {order.isPaid ? "Pagado" : "Pendiente"}
+                    <span className={`badge-pago ${order.status === 'cancelled' ? 'cancelado' : order.isPaid ? "pagado" : "pendiente"}`} style={order.status === 'cancelled' ? { backgroundColor: '#ef4444', color: 'white', border: '1px solid #dc2626' } : {}}>
+                      {order.status === 'cancelled' ? 'Cancelado' : order.isPaid ? "Pagado" : "Pendiente"}
                     </span>
                   </td>
                   <td>
-                    <span className={`badge-envio ${order.isDelivered ? "enviado" : "pendiente"}`}>
-                      {order.isDelivered ? "Enviado" : "Pendiente"}
+                    <span className={`badge-envio ${order.status === 'cancelled' ? 'cancelado' : order.isDelivered ? "enviado" : "pendiente"}`} style={order.status === 'cancelled' ? { backgroundColor: '#ef4444', color: 'white', border: '1px solid #dc2626' } : {}}>
+                      {order.status === 'cancelled' ? 'Cancelado' : order.isDelivered ? "Enviado" : "Pendiente"}
                     </span>
                   </td>
                   <td>
