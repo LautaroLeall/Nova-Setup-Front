@@ -1,6 +1,6 @@
 // src/components/home/Hero.jsx
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useContext } from "react";
+import { useRef, useContext, useState, useEffect } from "react";
 import { ProductContext } from "../../context/ProductContext";
 import { CartContext } from "../../context/CartContext";
 import { sileo } from "sileo";
@@ -120,16 +120,29 @@ export function HeroEcommerce() {
 
     // ── Movimiento del carrusel (Ocurre mientras la Mac está centrada)
     const carouselX = useTransform(scrollYProgress, [0.30, 0.60], ["0%", "-50%"]);
+    const carouselXMobile = useTransform(scrollYProgress, [0.30, 0.60], ["0%", "-66.6666%"]);
 
     // ── Título: arranca centrado y es empujado hacia arriba
     const titleScale = useTransform(scrollYProgress, [0, 0.20], [1, 0.8]);
     const titleOpacity = useTransform(scrollYProgress, [0, 0.20], [1, 0]);
     const titleY = useTransform(scrollYProgress, [0, 0.25], ["-5vh", "-50vh"]);
 
-    // Usamos 12 productos: 6 para la primera pantalla, 6 para la segunda
-    const items = products ? products.slice(0, 12) : [];
-    const group1 = items.slice(0, 6);
-    const group2 = items.slice(6, 12);
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    // Usamos 12 productos en PC, 6 en móvil
+    const totalItems = isMobile ? 6 : 12;
+    const items = products ? products.slice(0, totalItems) : [];
+
+    // Grupos: PC (6 y 6) | Móvil (2, 2 y 2)
+    const group1 = isMobile ? items.slice(0, 2) : items.slice(0, 6);
+    const group2 = isMobile ? items.slice(2, 4) : items.slice(6, 12);
+    const group3 = isMobile ? items.slice(4, 6) : [];
 
     return (
         <div ref={containerRef} className="hero-wrapper">
@@ -177,15 +190,16 @@ export function HeroEcommerce() {
                             <div className="mac-carousel-dots">
                                 <div className="mac-carousel-dot active" />
                                 <div className="mac-carousel-dot inactive" />
+                                {isMobile && <div className="mac-carousel-dot inactive" />}
                             </div>
 
                             {/* Carrusel Deslizable */}
                             <motion.div
-                                style={{ width: "200%", x: carouselX }}
+                                style={{ width: isMobile ? "300%" : "200%", x: isMobile ? carouselXMobile : carouselX }}
                                 className="mac-carousel-wrapper"
                             >
                                 {/* Pantalla 1 */}
-                                <div className="mac-carousel-page">
+                                <div className="mac-carousel-page" style={{ width: isMobile ? "33.3333%" : "50%" }}>
                                     {group1.map((p, idx) => (
                                         <div key={p._id || idx} className="mac-product-wrapper">
                                             <ProductCard product={p} />
@@ -193,13 +207,23 @@ export function HeroEcommerce() {
                                     ))}
                                 </div>
                                 {/* Pantalla 2 */}
-                                <div className="mac-carousel-page">
+                                <div className="mac-carousel-page" style={{ width: isMobile ? "33.3333%" : "50%" }}>
                                     {group2.map((p, idx) => (
                                         <div key={p._id || idx} className="mac-product-wrapper">
                                             <ProductCard product={p} />
                                         </div>
                                     ))}
                                 </div>
+                                {/* Pantalla 3 */}
+                                {isMobile && (
+                                    <div className="mac-carousel-page" style={{ width: "33.3333%" }}>
+                                        {group3.map((p, idx) => (
+                                            <div key={p._id || idx} className="mac-product-wrapper">
+                                                <ProductCard product={p} />
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
                             </motion.div>
                         </div>
                     </MacScreen>
