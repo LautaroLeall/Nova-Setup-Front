@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import './index.css'
+import './styles/responsive.css'
 import App from './App.jsx'
 
 // Obtenemos el Client ID desde las variables de entorno de Vite
