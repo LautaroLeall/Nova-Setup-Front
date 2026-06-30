@@ -2,6 +2,8 @@
 
 .home-page-container {
   background-color: var(--color-nova-bg);
+  overflow-x: clip;
+  width: 100%;
 }
 
 /* -- Animacion 2.5D (Setup Assembly) -- */
@@ -226,6 +228,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
 }
 
 .cta-glow-main {
