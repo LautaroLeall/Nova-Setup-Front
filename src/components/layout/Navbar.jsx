@@ -185,28 +185,32 @@ export const Navbar = () => {
                         <div className="navbar-mobile-content">
 
                             {/* User Section Mobile */}
-                            <div className="navbar-mobile-user">
-                                <div className="navbar-mobile-avatar">
-                                    <User size={24} color="white" />
+                            {user ? (
+                                <Link to="/perfil" className="navbar-mobile-user-card" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <div className="navbar-mobile-avatar">
+                                        <User size={24} color="white" />
+                                    </div>
+                                    <div className="navbar-mobile-user-info">
+                                        <p className="navbar-mobile-user-name">{user.firstName} {user.lastName}</p>
+                                        <p className="navbar-mobile-user-subtitle">Ir a mi perfil</p>
+                                    </div>
+                                </Link>
+                            ) : (
+                                <div className="navbar-mobile-user-card guest">
+                                    <div className="navbar-mobile-avatar">
+                                        <User size={24} color="rgba(255,255,255,0.5)" />
+                                    </div>
+                                    <div className="navbar-mobile-user-info">
+                                        <p className="navbar-mobile-welcome">Bienvenido a Nova</p>
+                                        <div className="navbar-mobile-auth-links">
+                                            <Link to="/login" className="navbar-mobile-auth-login" onClick={() => setIsMobileMenuOpen(false)}>Iniciar Sesión</Link>
+                                            <Link to="/register" className="navbar-mobile-auth-register" onClick={() => setIsMobileMenuOpen(false)}>Crear Cuenta</Link>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="navbar-mobile-user-info">
-                                    {user ? (
-                                        <>
-                                            <p className="navbar-mobile-user-name">{user.firstName} {user.lastName}</p>
-                                            <button onClick={logout} className="navbar-mobile-logout">Cerrar Sesión</button>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <p className="navbar-mobile-welcome">Bienvenido</p>
-                                            <div className="navbar-mobile-auth-links">
-                                                <Link to="/login" className="navbar-mobile-auth-login">Iniciar Sesión</Link>
-                                                <span className="navbar-mobile-auth-separator">|</span>
-                                                <Link to="/register" className="navbar-mobile-auth-register">Registrarse</Link>
-                                            </div>
-                                        </>
-                                    )}
-                                </div>
-                            </div>
+                            )}
+
+                            <div className="navbar-mobile-divider"></div>
 
                             {/* Nav Links Mobile */}
                             <ul className="navbar-mobile-list">
@@ -215,13 +219,28 @@ export const Navbar = () => {
                                         <Link
                                             to={link.to}
                                             className="navbar-mobile-link"
+                                            onClick={() => setIsMobileMenuOpen(false)}
                                         >
-                                            <span className="navbar-mobile-link-dot"></span>
                                             {link.name}
                                         </Link>
                                     </li>
                                 ))}
+                                {user?.isAdmin && (
+                                    <li className="navbar-mobile-admin-item">
+                                        <Link to="/admin/dashboard" className="navbar-mobile-link admin-link" onClick={() => setIsMobileMenuOpen(false)}>
+                                            Panel de Administrador
+                                        </Link>
+                                    </li>
+                                )}
                             </ul>
+
+                            {user && (
+                                <div className="navbar-mobile-footer">
+                                    <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="navbar-mobile-logout-btn">
+                                        Cerrar Sesión
+                                    </button>
+                                </div>
+                            )}
 
                         </div>
                     </motion.div>
