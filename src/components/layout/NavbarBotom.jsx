@@ -53,7 +53,8 @@ export function BottomNavBar({
                 return;
             }
 
-            const MULTIPLICADOR = 3.5;
+            const isMobile = window.innerWidth <= 768;
+            const MULTIPLICADOR = isMobile ? 1.6 : 3.5;
             const heroEnd = window.innerHeight * MULTIPLICADOR;
 
             // Mostrar siempre la barra inferior en rutas distintas a la principal
