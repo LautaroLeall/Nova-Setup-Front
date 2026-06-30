@@ -35,7 +35,8 @@ export const Navbar = () => {
             // eslint-disable-next-line react-hooks/set-state-in-effect
             setIsMobileMenuOpen(false);
         }
-    }, [location.pathname, isMobileMenuOpen]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location.pathname]); // Remove isMobileMenuOpen to avoid immediate close on toggle
 
     const navLinks = [
         { name: "Inicio", to: "/" },
@@ -73,7 +74,7 @@ export const Navbar = () => {
                             className="navbar-logo-img"
                         />
                     </div>
-                    <span className="navbar-logo-text">
+                    <span className={`navbar-logo-text ${isSearchOpen ? 'hide-on-search' : ''}`}>
                         Nova SetUp
                     </span>
                 </Link>

@@ -68,3 +68,15 @@
     display: block;
   }
 }
+
+.navbar-logo-text {
+  transition: opacity 0.3s ease, width 0.3s ease, margin 0.3s ease;
+}
+
+.navbar-logo-text.hide-on-search {
+  opacity: 0;
+  width: 0;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
