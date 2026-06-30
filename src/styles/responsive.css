@@ -1,0 +1,349 @@
+/* ==========================================================================
+   Responsive Design for Nova SetUp
+   Este archivo se aplica AL FINAL, sobreescribiendo estilos sólo en pantallas pequeñas,
+   sin afectar el escritorio.
+   ========================================================================== */
+
+/* ==========================================================================
+   TABLET & MOBILE (Max Width: 1024px)
+   ========================================================================== */
+@media (max-width: 1024px) {
+
+  /* HERO SECTION */
+  .hero-title {
+    font-size: 3rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem !important;
+  }
+
+  .hero-mac-container {
+    max-width: 90% !important;
+  }
+
+  /* SHOP & BUILDER */
+  .shop-sidebar {
+    width: 200px !important;
+    /* Si aún está visible como columna */
+  }
+
+  /* CART */
+  .cart-drawer {
+    width: 100% !important;
+    max-width: 420px !important;
+  }
+}
+
+/* ==========================================================================
+   MOBILE (Max Width: 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+
+  /* -------------------------
+     NAVBAR
+     ------------------------- */
+  .navbar-logo-text {
+    font-size: 1rem !important;
+    display: block !important;
+  }
+
+  .navbar-logo-img {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+
+  .navbar-desktop-nav,
+  .navbar-user-group {
+    display: none !important;
+  }
+
+  .navbar-mobile-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .navbar-mobile-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: rgba(6, 6, 15, 0.98) !important;
+    z-index: 100 !important;
+    border-top: 1px solid rgba(44, 39, 103, 0.8) !important;
+    display: block !important;
+    height: auto;
+  }
+
+  /* -------------------------
+     HERO ECOMMERCE
+     ------------------------- */
+  .hero-wrapper {
+    height: 250vh !important;
+  }
+
+  .hero-sticky-zone {
+    height: 100vh !important;
+  }
+
+  .hero-title {
+    font-size: 2rem !important;
+    margin-top: 2rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem !important;
+    padding: 0 1rem !important;
+  }
+
+  .hero-mac-container {
+    width: 100% !important;
+    padding: 0 0.5rem !important;
+    margin-top: 3rem !important;
+  }
+
+  .mac-frame {
+    border-width: 2px !important;
+    border-radius: 1rem !important;
+  }
+
+  .mac-notch {
+    width: 4rem !important;
+    height: 0.8rem !important;
+  }
+
+  .mac-chin {
+    height: 1rem !important;
+  }
+
+  .mac-chin-text {
+    font-size: 0.4rem !important;
+  }
+
+  .product-hero-card {
+    min-width: 120px !important;
+  }
+
+  .product-hero-name {
+    font-size: 0.75rem !important;
+  }
+
+  /* -------------------------
+     HOME PAGE
+     ------------------------- */
+  .manifesto-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .manifesto-title {
+    font-size: 2.2rem !important;
+  }
+
+  .home-manifesto-section {
+    padding: 5rem 1.5rem !important;
+  }
+
+  .home-assembly-section {
+    height: 300vh !important;
+  }
+
+  .assembly-intro-text h2,
+  .assembly-outro-text h2 {
+    font-size: 2rem !important;
+  }
+
+  .assembly-intro-text p,
+  .assembly-outro-text p {
+    font-size: 1rem !important;
+  }
+
+  .home-section-cta h2 {
+    font-size: 1.8rem !important;
+  }
+
+  .home-section-cta p {
+    font-size: 1rem !important;
+    padding: 0 1rem;
+  }
+
+  .cta-content-wrapper {
+    padding: 2rem 1rem !important;
+  }
+
+  .assembly-stage {
+    transform: scale(0.6);
+  }
+
+  /* -------------------------
+     SHOP & PRODUCT DETAIL
+     ------------------------- */
+  .shop-header {
+    padding: 3rem 1rem 2rem !important;
+  }
+
+  .shop-title {
+    font-size: 2rem !important;
+  }
+
+  .shop-container {
+    flex-direction: column !important;
+    padding: 0 1rem 4rem !important;
+  }
+
+  .shop-sidebar {
+    width: 100% !important;
+    position: relative !important;
+    top: 0 !important;
+    max-height: none !important;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .product-card {
+    min-height: auto !important;
+  }
+
+  .product-detail-page {
+    padding-top: 80px !important;
+    padding-inline: 1rem !important;
+  }
+
+  .detail-layout {
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+
+  .detail-scroll-column,
+  .detail-sticky-column {
+    width: 100% !important;
+  }
+
+  .detail-sticky-column {
+    position: relative !important;
+    top: 0 !important;
+  }
+
+  .product-info-title {
+    font-size: 2rem !important;
+  }
+
+  /* -------------------------
+     PC BUILDER
+     ------------------------- */
+  .builder-layout-container {
+    padding: 0 1rem !important;
+  }
+
+  .builder-main-content {
+    flex-direction: column !important;
+  }
+
+  .builder-left-col,
+  .builder-right-col {
+    width: 100% !important;
+  }
+
+  .builder-right-col {
+    position: relative !important;
+    top: 0 !important;
+  }
+
+  .builder-step-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+  }
+
+  .builder-step-products {
+    grid-template-columns: 1fr !important;
+    /* One column on mobile for builder products */
+  }
+
+  /* -------------------------
+     ADMIN & PROFILE
+     ------------------------- */
+  .admin-page,
+  .profile-page {
+    padding: 5rem 1rem 6rem !important;
+  }
+
+  .admin-container,
+  .profile-container {
+    grid-template-columns: 1fr !important;
+  }
+
+  .admin-sidebar,
+  .profile-sidebar {
+    width: 100% !important;
+    position: relative !important;
+    top: 0 !important;
+    height: auto !important;
+    margin-bottom: 2rem;
+  }
+
+  .admin-title,
+  .profile-title {
+    font-size: 1.5rem !important;
+  }
+
+  .admin-header-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  /* Make tables horizontally scrollable without breaking the layout */
+  .table-wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .admin-table {
+    min-width: 600px !important;
+    /* Force min-width so it scrolls instead of squishing */
+  }
+
+  /* -------------------------
+     CART & CHECKOUT
+     ------------------------- */
+  .checkout-container {
+    padding: 5rem 1rem 6rem !important;
+  }
+
+  .checkout-layout {
+    flex-direction: column !important;
+  }
+
+  .checkout-form-col,
+  .checkout-summary-col {
+    width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   SMALL MOBILE (Max Width: 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.6rem !important;
+  }
+
+  .manifesto-title {
+    font-size: 1.8rem !important;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr !important;
+    /* 1 col on very small screens */
+  }
+
+  .cart-drawer {
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+}
