@@ -69,7 +69,6 @@ const Checkout = () => {
       setPreferenceId(mpData.preferenceId);
       setStep(2);
     } catch (err) {
-      console.error(err);
       setError(
         err.response?.data?.message || "Error al procesar la orden. Intenta nuevamente."
       );

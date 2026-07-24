@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { Filter, X, ChevronDown, ChevronUp } from "lucide-react";
+import { Filter, ChevronDown, ChevronUp } from "lucide-react";
+import { getEffectivePrice } from "../../utils/getEffectivePrice";
 import "../../styles/builder/BuilderFilters.css";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -18,7 +19,7 @@ export const BuilderFilters = ({
 
     products.forEach(p => {
       if (p.brand) brands.add(p.brand);
-      const price = p.discountPrice || p.price || 0;
+      const price = getEffectivePrice(p);
       if (price > maxP) maxP = price;
 
       if (p.features && Array.isArray(p.features)) {

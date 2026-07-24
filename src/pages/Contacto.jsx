@@ -33,8 +33,7 @@ const Contacto = () => {
                     position: "bottom-right"
                 });
                 form.current.reset();
-            }, (error) => {
-                console.error(error);
+            }, () => {
                 sileo.error({
                     title: "Error",
                     description: "Hubo un problema al enviar el mensaje.",
