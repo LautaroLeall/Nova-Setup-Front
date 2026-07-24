@@ -2,7 +2,8 @@ import { useContext, useState } from "react";
 import { PCBuilderContext } from "../../context/PCBuilderContext";
 import { CartContext } from "../../context/CartContext";
 import { useNavigate } from "react-router";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { getEffectivePrice } from "../../utils/getEffectivePrice";
 import "../../styles/builder/BuilderSummaryBox.css";
 import { X, ShoppingCart } from "lucide-react";
 import confetti from "canvas-confetti"; // Usaremos esto para la celebración si se puede, o algo simple
@@ -27,7 +28,7 @@ export const BuilderSummaryBox = () => {
 
     setIsFinishing(true);
 
-    // Animación de celebración 🎉
+    // Animación de celebración
     confetti({
       particleCount: 100,
       spread: 70,
@@ -75,7 +76,7 @@ export const BuilderSummaryBox = () => {
               <div className="item-action-col">
                 {product ? (
                   <div className="item-price-action">
-                    <span className="item-price">${product.discountPrice || product.price}</span>
+                    <span className="item-price">${getEffectivePrice(product)}</span>
                     <button
                       className="btn-remove-item"
                       onClick={(e) => { e.stopPropagation(); removeComponent(step.id); }}

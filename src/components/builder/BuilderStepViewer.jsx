@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext, useMemo } from "react";
+import { getEffectivePrice } from "../../utils/getEffectivePrice";
 import { PCBuilderContext } from "../../context/PCBuilderContext";
 import { motion, AnimatePresence } from "framer-motion";
 import "../../styles/builder/BuilderStepViewer.css";
@@ -41,7 +42,7 @@ export const BuilderStepViewer = () => {
         // Calcular precio máximo para resetear el filtro correctamente
         let maxP = 0;
         fetchedProducts.forEach(p => {
-          const price = p.discountPrice || p.price || 0;
+          const price = getEffectivePrice(p);
           if (price > maxP) maxP = price;
         });
 
@@ -49,7 +50,6 @@ export const BuilderStepViewer = () => {
         setFilters({ brands: [], maxPrice: 0, features: {} });
 
       } catch (err) {
-        console.error("Error loading builder components:", err);
         setError("Error al cargar componentes. Intenta de nuevo.");
       } finally {
         setLoading(false);
@@ -61,7 +61,7 @@ export const BuilderStepViewer = () => {
 
   const filteredProducts = useMemo(() => {
     return products.filter(p => {
-      const price = p.discountPrice || p.price || 0;
+      const price = getEffectivePrice(p);
 
       // Filtro Precio
       if (filters.maxPrice > 0 && price > filters.maxPrice) return false;
@@ -157,7 +157,7 @@ export const BuilderStepViewer = () => {
                         <span className="card-brand">{product.brand}</span>
                         <h4 className="card-name">{product.name}</h4>
                         <div className="card-price-row">
-                          <span className="card-price">${product.discountPrice || product.price}</span>
+                          <span className="card-price">${getEffectivePrice(product)}</span>
                           {isOutOfStock && <span className="stock-badge">Agotado</span>}
                         </div>
                         {/* Mostrar las features abajo como badges pequeños */}
